@@ -302,7 +302,7 @@ func inputManagement():
 				pass 
 				
 			states.GRAPPLE:
-				giveBackPain(Vector2(velocity.x,velocity.z).length()/350)
+				giveBackPain(Vector2(velocity.x,velocity.z).length()/400)
 
 				if Input.is_action_just_pressed("jump"):
 					jump(grapHookSpeed/3, true)
@@ -764,9 +764,9 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
-	if floorCheck.is_colliding() and abs(velocity.y) > 35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
-		var fellVelocity = abs(velocity.y)
-		giveBackPain(abs(velocity.y)/1.375)
+	if floorCheck.is_colliding() and velocity.y <= -35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
+		var fellVelocity = round(abs(velocity.y))
+		giveBackPain(fellVelocity/1.375)
 		
 		if fellVelocity > 75:
 			giveBackPain(30)
