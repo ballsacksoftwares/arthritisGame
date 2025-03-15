@@ -130,7 +130,7 @@ var timeBeforeCanGrappleAgainRef : float
 var backpain = 0
 
 func giveBackPain(pain):
-	backpain = clamp(backpain+pain,0,100)
+	backpain = clamp(backpain+pain,0,INF)
 
 func _ready():
 	#set the start move speed
