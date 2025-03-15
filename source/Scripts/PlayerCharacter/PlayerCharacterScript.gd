@@ -13,6 +13,8 @@ enum states
 var currentState 
 
 #move variables
+@export_group("musical harmonies")
+@export var music:Resource
 @export_group("move variables")
 var moveSpeed : float
 var desiredMoveSpeed : float 
@@ -134,6 +136,8 @@ func giveBackPain(pain):
 	backpain = clamp(backpain+pain,0,INF)
 
 func _ready():
+	$AudioStreamPlayer.stream = music
+	$AudioStreamPlayer.play()
 	#set the start move speed
 	moveSpeed = walkSpeed
 	moveAcceleration = walkAcceleration
@@ -182,6 +186,7 @@ func _process(_delta):
 	if backpain >= 100 and not dead:
 		dead = true
 		velocity *= 50
+		OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
 		await get_tree().create_timer(2).timeout
 		get_tree().reload_current_scene()
 	
