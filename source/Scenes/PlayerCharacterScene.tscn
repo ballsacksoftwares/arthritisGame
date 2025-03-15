@@ -608,4 +608,6 @@ vertical_alignment = 1
 [node name="PauseMenu" parent="." instance=ExtResource("6_3wmtt")]
 visible = false
 
+[node name="hurtsound" type="AudioStreamPlayer" parent="."]
+
 [connection signal="sendKnockback" from="CameraHolder/Camera3D/ObjectTool" to="." method="_on_object_tool_send_knockback"]

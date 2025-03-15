@@ -1,0 +1,236 @@
+[gd_scene load_steps=14 format=3 uid="uid://clulwyx4nxpva"]
+
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_qrg6c"]
+[ext_resource type="AudioStream" uid="uid://ikl866364c7g" path="res://Scenes/New_Project (1) (1).mp3" id="2_1x0xh"]
+[ext_resource type="Texture2D" uid="uid://d2pvy8hc50ltk" path="res://Textures/Textures/kenney_prototype_textures/light/texture_03.png" id="3_jaajx"]
+[ext_resource type="ArrayMesh" uid="uid://b00vl1nmggcku" path="res://Scenes/HospitalBed.obj" id="6_mrxql"]
+[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="6_vn7r1"]
+[ext_resource type="Resource" uid="uid://celm26gbrje74" path="res://Scenes/level2.tscn" id="7_vwkqt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_iebnq"]
+sky_material = SubResource("ProceduralSkyMaterial_fjbi6")
+
+[sub_resource type="Environment" id="Environment_pyxgo"]
+background_mode = 2
+sky = SubResource("Sky_iebnq")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2a60c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
+albedo_texture = ExtResource("3_jaajx")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4iphx"]
+albedo_color = Color(0.360784, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 2.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_didp7"]
+height = 0.15
+radius = 2.0
+
+[node name="TemplateMap" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_pyxgo")
+camera_attributes = SubResource("CameraAttributesPractical_2a60c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PlayerCharacter" type="Node3D" parent="."]
+
+[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_qrg6c")]
+transform = Transform3D(1.00022, 0, 0, 0, 1.00022, 0, 0, 0, 1.00022, -37.8026, 1.70622, 2.09406)
+music = ExtResource("2_1x0xh")
+timeBeforeCanSlideAgain = 0.0
+
+[node name="AudioStreamPlayer" parent="PlayerCharacter/PlayerCharacterV2" index="0"]
+pitch_scale = 0.71
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Blocks" type="Node3D" parent="Map"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.3637, -60.5235, 4.76621)
+use_collision = true
+collision_mask = 2
+size = Vector3(61.6821, 121.773, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.9988, -29.8652, -13.7497)
+use_collision = true
+collision_mask = 2
+size = Vector3(102.952, 182.609, 4.67632)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -413.857, -59.3989, 61.2033)
+use_collision = true
+collision_mask = 2
+size = Vector3(587.705, 461.227, 158.244)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -360.966, -63.9131, 257.304)
+use_collision = true
+collision_mask = 2
+size = Vector3(678.887, 461.227, 158.244)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -365.148, 163.67, 82.6215)
+use_collision = true
+collision_mask = 2
+size = Vector3(687.25, 6.0606, 197.419)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -653.882, -18.9599, 82.2266)
+use_collision = true
+collision_mask = 2
+size = Vector3(110.506, 372.028, 197.419)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -613.522, -43.2216, 83.6721)
+use_collision = true
+collision_mask = 2
+size = Vector3(191.84, 321.161, 197.419)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -145.282, -18.6704, 155.169)
+use_collision = true
+collision_mask = 2
+size = Vector3(52.0069, 291.93, 51.8357)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317.707, -18.6704, 155.169)
+use_collision = true
+collision_mask = 2
+size = Vector3(52.0069, 291.93, 51.8357)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -517.919, -18.6704, 155.169)
+use_collision = true
+collision_mask = 2
+size = Vector3(52.0069, 291.93, 51.8357)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999834, -0.0182377, 0, 0.0182377, 0.999834, 0, 0, 0, 1, -90.5768, 124.519, 60.2058)
+use_collision = true
+collision_mask = 2
+size = Vector3(69.1011, 131.7, 151.275)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999935, -0.0114142, 0, 0.0114142, 0.999935, 0, 0, 0, 1, -52.9653, 22.5567, 102.199)
+use_collision = true
+collision_mask = 2
+size = Vector3(61.6821, 287.94, 156.54)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999935, -0.0114142, 0, 0.0114142, 0.999935, 0, 0, 0, 1, -52.3637, -30.1419, 102.199)
+use_collision = true
+collision_mask = 2
+size = Vector3(61.6821, 182.536, 156.54)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999935, -0.0114142, 0, 0.0114142, 0.999935, 0, 0, 0, 1, -72.2163, 21.8393, 175.874)
+use_collision = true
+collision_mask = 2
+size = Vector3(100.198, 286.945, 9.18826)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6492, -41.8463, 4.76621)
+use_collision = true
+collision_mask = 2
+size = Vector3(4.25304, 159.127, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.6723, 46.4576, 4.76621)
+use_collision = true
+collision_mask = 2
+size = Vector3(62.2994, 30.5104, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999976, -0.00699871, 0, 0.00699871, 0.999976, 0, 0, 0, 1, -99.9037, -49.2254, 4.95428)
+use_collision = true
+collision_mask = 2
+size = Vector3(44.9268, 141.782, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999976, -0.00699871, 0, 0.00699871, 0.999976, 0, 0, 0, 1, -99.9037, -49.2254, 158.581)
+use_collision = true
+collision_mask = 2
+size = Vector3(44.9268, 141.782, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999976, -0.00699871, 0, 0.00699871, 0.999976, 0, 0, 0, 1, -99.6121, -114.52, 67.1999)
+use_collision = true
+collision_mask = 2
+size = Vector3(44.9268, 9.23599, 166.199)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-3.86638, 0, 0.728144, 0, 3.33878, 0, -4.10736, 0, -0.685425, -48.6288, 2.61414, 12.7357)
+text = "scale the hosiptial       
+and cure your back [p;ain"
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(-15.5184, 0, -0.556643, 0, 14.1213, 0, -16.4856, 0, 0.523986, -558.173, 120.926, 169.635)
+text = "YOU WON!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"
+
+[node name="Jumppad4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -51.8275, 66.0447, 189.948)
+material_override = SubResource("StandardMaterial3D_4iphx")
+use_collision = true
+collision_mask = 2
+radius = 25.0
+height = 0.15
+script = ExtResource("6_vn7r1")
+scene = ExtResource("7_vwkqt")
+
+[node name="Area3D" type="Area3D" parent="Jumppad4"]
+transform = Transform3D(15.45, 0, 0, 0, 0.999999, 0, 0, 0, 15.45, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jumppad4/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_didp7")
+
+[node name="HospitalBed" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0884355, 0, 0, 0, 0.0777294, 0, 0, 0, 0.0327006, -571.2, 118.507, 165.645)
+mesh = ExtResource("6_mrxql")
+
+[connection signal="area_entered" from="Jumppad4/Area3D" to="Jumppad4" method="_on_area_3d_area_entered"]
+
+[editable path="PlayerCharacter/PlayerCharacterV2"]

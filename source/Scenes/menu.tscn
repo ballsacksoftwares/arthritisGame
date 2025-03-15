@@ -1,0 +1,459 @@
+[gd_scene load_steps=24 format=3 uid="uid://chgr5nsmxi5ql"]
+
+[ext_resource type="LabelSettings" uid="uid://d1rg1oruwidf" path="res://Textures/Fonts/LabelFontTemplate.tres" id="1_rfqti"]
+[ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="2_g8i7c"]
+[ext_resource type="Texture2D" uid="uid://bxlhr0tusc84l" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_01.png" id="3_6swd7"]
+[ext_resource type="Script" uid="uid://4resirfixupo" path="res://Scenes/play.gd" id="3_23t3j"]
+[ext_resource type="PackedScene" uid="uid://bwesx33qa0fi0" path="res://Scenes/hospital.glb" id="3_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="4_7qvly"]
+[ext_resource type="Script" uid="uid://byxhlulqu1pmx" path="res://Scenes/run.gd" id="4_g8i7c"]
+[ext_resource type="ArrayMesh" uid="uid://c7rqekuxb06ih" path="res://Assets/uploads_files_734240_Skeleton.obj" id="5_q3rjx"]
+[ext_resource type="ArrayMesh" uid="uid://ci04u137kl6cs" path="res://Scenes/Barrel.obj" id="5_rfqti"]
+[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="6_g8i7c"]
+[ext_resource type="Resource" uid="uid://celm26gbrje74" path="res://Scenes/level2.tscn" id="7_23t3j"]
+[ext_resource type="AudioStream" uid="uid://fyhm0csmswmg" path="res://Scenes/New_Project.mp3" id="8_q3rjx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_iebnq"]
+sky_material = SubResource("ProceduralSkyMaterial_fjbi6")
+
+[sub_resource type="Environment" id="Environment_pyxgo"]
+background_mode = 2
+sky = SubResource("Sky_iebnq")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2a60c"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4iphx"]
+load_path = "res://.godot/imported/texture_03.png-4b40accf87ed2ee28023461b86aabd4c.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
+albedo_texture = SubResource("CompressedTexture2D_4iphx")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgkgd"]
+albedo_texture = ExtResource("3_6swd7")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygjqq"]
+albedo_texture = ExtResource("4_7qvly")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_linps"]
+albedo_texture = ExtResource("4_7qvly")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4iphx"]
+albedo_color = Color(0.360784, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 2.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_didp7"]
+height = 0.15
+radius = 2.0
+
+[node name="TemplateMap" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 74.0
+offset_right = 876.0
+offset_bottom = 477.0
+text = "arthritis
+"
+label_settings = ExtResource("1_rfqti")
+
+[node name="play" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 80.0
+offset_top = 353.0
+offset_right = 414.0
+offset_bottom = 521.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="play2" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 450.0
+offset_top = 280.0
+offset_right = 784.0
+offset_bottom = 448.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="play3" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 324.0
+offset_top = 523.0
+offset_right = 658.0
+offset_bottom = 691.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="play4" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 169.0
+offset_top = 707.0
+offset_right = 503.0
+offset_bottom = 875.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="play5" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 431.0
+offset_top = 655.0
+offset_right = 765.0
+offset_bottom = 823.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="play6" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 35.0
+offset_top = 859.0
+offset_right = 369.0
+offset_bottom = 1027.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "play"
+script = ExtResource("3_23t3j")
+
+[node name="run" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 1480.0
+offset_top = 233.0
+offset_right = 1768.0
+offset_bottom = 313.0
+theme_override_fonts/font = ExtResource("2_g8i7c")
+theme_override_font_sizes/font_size = 60
+text = "run away"
+script = ExtResource("4_g8i7c")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_pyxgo")
+camera_attributes = SubResource("CameraAttributesPractical_2a60c")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Blocks" type="Node3D" parent="Map"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.3637, -60.5235, 4.76621)
+use_collision = true
+collision_mask = 2
+size = Vector3(61.6821, 121.773, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(84.0219, 0, 0, 0, 2.31507, 0, 0, 0, 623.78, -52.3637, -176.168, 4.76621)
+use_collision = true
+collision_mask = 2
+size = Vector3(61.6821, 68.1688, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8711, -32.6742, -98.1203)
+use_collision = true
+collision_mask = 2
+size = Vector3(74.5802, 134.251, 62.733)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137.257, -7.8665, 4.7922)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 227.087, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.809, 13.4271, -82.001)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 280.895, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.9342, 13.4271, -126.737)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 280.895, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.9342, -1.32339, -15.0668)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 251.394, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.73167, 48.1531, 64.9233)
+use_collision = true
+collision_mask = 2
+size = Vector3(199.402, 339.37, 18.3002)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137.257, -46.0088, 45.3662)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 256.459, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.3098, -38.9833, 207.553)
+use_collision = true
+collision_mask = 2
+size = Vector3(176.822, 270.509, 10.7208)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.05, -38.9833, 165.275)
+use_collision = true
+collision_mask = 2
+size = Vector3(124.303, 270.509, 10.7208)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137.257, -53.0992, 186.447)
+use_collision = true
+collision_mask = 2
+size = Vector3(68.9271, 242.278, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0176, -37.5407, 186.447)
+use_collision = true
+collision_mask = 2
+size = Vector3(71, 273.395, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.444, -33.8489, 45.3662)
+use_collision = true
+collision_mask = 2
+size = Vector3(5.30096, 280.778, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -169.643, 74.8, 45.3662)
+use_collision = true
+collision_mask = 2
+size = Vector3(5.30096, 62.3846, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.608, 22.8762, 4.7922)
+use_collision = true
+collision_mask = 2
+size = Vector3(65.1148, 7.14957, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, -7.98582e-05, 6.41552e-05, 7.98615e-05, 1, 2.17418e-05, -6.41511e-05, -2.17536e-05, 1, -29.608, 118.246, 4.7922)
+use_collision = true
+collision_mask = 2
+size = Vector3(65.1148, 106.724, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 4.56672, 0, 0, 0, 1, -0.0754623, 72.5538, 4.7922)
+use_collision = true
+collision_mask = 2
+size = Vector3(6.04964, 22.4155, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 4.56672, 0, 1, 0, -4.37114e-08, -26.7705, 72.5538, 22.8083)
+use_collision = true
+collision_mask = 2
+size = Vector3(6.04964, 22.4155, 52.0668)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3827, 11.3954, 4.7922)
+use_collision = true
+collision_mask = 2
+size = Vector3(12.9973, 22.6634, 41.7081)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999956, -0.00940719, -2.13163e-14, 0.00931646, 0.990312, -0.138551, 0.00130337, 0.138545, 0.990355, -153.631, 82.6913, 91.6077)
+use_collision = true
+collision_layer = 5
+collision_mask = 4
+size = Vector3(1.38966, 8, 76.5595)
+material = SubResource("StandardMaterial3D_jgkgd")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-0.999956, 0.00940718, -8.95141e-08, 0.00934788, 0.993652, 0.112111, 0.00105467, 0.112106, -0.993696, -153.631, 73.839, 165.425)
+use_collision = true
+collision_layer = 5
+collision_mask = 4
+size = Vector3(1.38966, 8, 76.5595)
+material = SubResource("StandardMaterial3D_jgkgd")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-1.39783e-08, 0.980443, -0.196802, 4.14161e-08, -0.196802, -0.980443, -1, -2.18557e-08, -3.78552e-08, -94.5358, 21.3305, 7.14205)
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_mask = 2
+size = Vector3(14, 1, 9.98828)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-2.42213e-08, 0.997971, 0.0636612, 3.6387e-08, 0.0636612, -0.997971, -1, -2.18557e-08, -3.78552e-08, -103.062, 21.4083, 10.1906)
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 0
+collision_mask = 2
+size = Vector3(0.628632, 17.9028, 0.24707)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-2.42213e-08, 0.997971, 0.0636612, 3.6387e-08, 0.0636612, -0.997971, -1, -2.18557e-08, -3.78552e-08, -103.062, 21.4083, 4.66814)
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 0
+collision_mask = 2
+size = Vector3(0.628632, 17.9028, 0.24707)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-2.42213e-08, 0.997971, 0.0636612, 3.6387e-08, 0.0636612, -0.997971, -1, -2.18557e-08, -3.78552e-08, -103.062, 21.4083, 7.38097)
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 0
+collision_mask = 2
+size = Vector3(0.628632, 17.9028, 0.24707)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.816, 2.3, -14.332)
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_mask = 2
+size = Vector3(16.975, 0.5, 16.558)
+
+[node name="Sketchfab_Scene" parent="Map/Blocks" instance=ExtResource("3_wbdvm")]
+transform = Transform3D(-2.93639, 0, -2.29507, 0, 3.7269, 0, 2.29507, 0, -2.93639, -47.6809, 0.363003, 3.25569)
+
+[node name="Barrel" type="MeshInstance3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.2257, 2.14656, 2.06043)
+mesh = ExtResource("5_rfqti")
+
+[node name="Barrel2" type="MeshInstance3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.396, 2.14656, 1.39477)
+mesh = ExtResource("5_rfqti")
+
+[node name="UploadsFiles734240Skeleton" type="MeshInstance3D" parent="Map/Blocks"]
+transform = Transform3D(-0.425462, 1.74406, -1.86464, 0.304642, 2.34964, 1.42853, 0.555409, 0.0472347, -2.21193, -56.584, 0.380671, -5.51641)
+mesh = ExtResource("5_q3rjx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map/Blocks/UploadsFiles734240Skeleton"]
+transform = Transform3D(1.31046, 1.49012e-08, 3.57628e-07, -2.28174e-08, 0.341697, -4.98258e-08, -1.49012e-08, 9.31323e-10, 0.309935, 10.9162, 0.517256, 2.75207)
+light_energy = 0.259
+
+[node name="Barrel4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9026, -0.43048, 0, 0.43048, 0.9026, -21.4126, -2.1528, -18.184)
+mesh = ExtResource("5_rfqti")
+
+[node name="Label3D6" type="Label3D" parent="."]
+transform = Transform3D(-3.86638, 0, 0.728144, 0, 3.33878, 0, -4.10736, 0, -0.685425, -153.787, 85.7016, 53.5553)
+text = "You can run   on these walls"
+
+[node name="Label3D5" type="Label3D" parent="."]
+transform = Transform3D(-0.590414, 0, -0.994507, 0, 3.33878, 0, 5.60988, 0, -0.104667, -15.1063, 29.8787, -0.224449)
+text = "stand still to heal your back pain
+"
+
+[node name="Label3D4" type="Label3D" parent="."]
+transform = Transform3D(0.244877, -0.800575, 1.00129, -0.935604, 31.4204, 0.0278875, -9.32072, -3.17498, 0.0235067, -92.4633, 21.7897, 6.83299)
+text = "i want skeleton"
+
+[node name="Jumppad4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -51.8275, 66.0447, 189.948)
+material_override = SubResource("StandardMaterial3D_4iphx")
+use_collision = true
+collision_mask = 2
+radius = 25.0
+height = 0.15
+script = ExtResource("6_g8i7c")
+scene = ExtResource("7_23t3j")
+
+[node name="Area3D" type="Area3D" parent="Jumppad4"]
+transform = Transform3D(15.45, 0, 0, 0, 0.999999, 0, 0, 0, 15.45, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jumppad4/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_didp7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.534959, -0.014223, -0.844758, -0.0124934, 0.999882, -0.00892312, 0.844786, 0.0057804, -0.535074, -62.6602, 5.70553, -10.013)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera3D"]
+stream = ExtResource("8_q3rjx")
+volume_db = 5.35
+autoplay = true
+
+[connection signal="pressed" from="Control/play" to="Control/play" method="_on_pressed"]
+[connection signal="pressed" from="Control/play2" to="Control/play2" method="_on_pressed"]
+[connection signal="pressed" from="Control/play3" to="Control/play3" method="_on_pressed"]
+[connection signal="pressed" from="Control/play4" to="Control/play4" method="_on_pressed"]
+[connection signal="pressed" from="Control/play5" to="Control/play5" method="_on_pressed"]
+[connection signal="pressed" from="Control/play6" to="Control/play6" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/run" to="Control/run" method="_on_mouse_entered"]
+[connection signal="pressed" from="Control/run" to="Control/run" method="_on_pressed"]
+[connection signal="area_entered" from="Jumppad4/Area3D" to="Jumppad4" method="_on_area_3d_area_entered"]

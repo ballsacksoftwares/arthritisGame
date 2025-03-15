@@ -30,7 +30,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_erykl")
 theme_override_font_sizes/font_size = 50
-text = "Paused"
+text = "THE GRAND GREATEST GAME IS PAUSEED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -44,7 +44,7 @@ custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_erykl")
 theme_override_font_sizes/font_size = 55
-text = "Resume"
+text = "KEEP PLAYING"
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -58,7 +58,7 @@ custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_erykl")
 theme_override_font_sizes/font_size = 55
-text = "Retry"
+text = "START AGAIN"
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -72,7 +72,7 @@ custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_erykl")
 theme_override_font_sizes/font_size = 55
-text = "Quit"
+text = "CHICKEN OUT"
 
 [node name="OptionsMenu" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_0w74v")]
 pauseMenu = NodePath("..")

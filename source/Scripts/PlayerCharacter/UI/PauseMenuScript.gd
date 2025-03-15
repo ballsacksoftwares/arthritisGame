@@ -40,5 +40,5 @@ func _on_options_button_pressed():
 	
 func _on_quit_button_pressed():
 	#close the window, and so close the game
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
 	
