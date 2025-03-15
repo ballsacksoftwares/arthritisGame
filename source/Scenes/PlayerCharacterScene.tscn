@@ -168,7 +168,6 @@ jumpHeight = 4.0
 jumpTimeToPeak = 0.4
 jumpTimeToFall = 0.35
 jumpCooldown = 0.25
-nbJumpsInAirAllowed = 1
 coyoteJumpCooldown = 0.3
 slideTime = 1.0
 timeBeforeCanSlideAgain = 0.5

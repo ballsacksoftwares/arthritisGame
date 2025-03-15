@@ -125,6 +125,11 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var mesh = $MeshInstance3D
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
+@onready var backpainMeter = $BackPain
+var backpain = 0
+
+func giveBackPain(pain):
+	backpain = clamp(backpain+pain,0,100)
 
 func _ready():
 	#set the start move speed
@@ -167,8 +172,10 @@ func _process(_delta):
 	#the behaviours that is preferable to check every "visual" frame
 	
 	if !pauseMenu.pauseMenuEnabled:
-		inputManagement()
+		backpain = clamp(backpain-((backpain/15)*_delta),0,100)
+		backpainMeter.value = backpain
 		
+		inputManagement()
 		displayStats()
 	
 func _physics_process(delta):
@@ -243,7 +250,9 @@ func inputManagement():
 				if Input.is_action_just_pressed("crouch | slide") and !ceilingCheck.is_colliding(): 
 					walkStateChanges()
 					
-			states.SLIDE: 
+			states.SLIDE:
+				giveBackPain(.2)
+				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
 				
@@ -687,6 +696,8 @@ func dashStateChanges():
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		
+		giveBackPain(25)
+		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
 			mesh.position.y = 0.0
@@ -719,7 +730,6 @@ func grappleStateChanges():
 		
 		#get the collision point of the grapple hook raycast check
 		anchorPoint = grappleHookCheck.get_collision_point()
-		
 		
 		standHitbox.disabled = false
 		crouchHitbox.disabled = true
