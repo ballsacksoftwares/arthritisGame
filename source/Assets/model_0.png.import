@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3u2g7wx0qvco"
-path.s3tc="res://.godot/imported/texture_02.png-807d8360e9c80e383061b05712db0b70.s3tc.ctex"
+uid="uid://m1jtb2fg6ljo"
+path.s3tc="res://.godot/imported/model_0.png-1690bfbc13212cfa95dc2ddded556599.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "57a8ead79277bdbf97317a4fe33b2839"
+}
 
 [deps]
 
-source_file="res://Textures/Textures/kenney_prototype_textures/orange/texture_02.png"
-dest_files=["res://.godot/imported/texture_02.png-807d8360e9c80e383061b05712db0b70.s3tc.ctex"]
+source_file="res://Assets/model_0.png"
+dest_files=["res://.godot/imported/model_0.png-1690bfbc13212cfa95dc2ddded556599.s3tc.ctex"]
 
 [params]
 

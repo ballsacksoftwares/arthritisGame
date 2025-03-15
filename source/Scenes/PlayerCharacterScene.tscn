@@ -1,13 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=29 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://dhkqm1wj2jool" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://bfu47ayhd0561" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
+[ext_resource type="ArrayMesh" uid="uid://c7rqekuxb06ih" path="res://Assets/uploads_files_734240_Skeleton.obj" id="3_k4h75"]
 [ext_resource type="Script" uid="uid://bbn3usomuucnf" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" uid="uid://0w2ryllnoi3d" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
 [ext_resource type="Texture2D" uid="uid://djt6k1cefv8mu" path="res://Textures/backpainMeter.png" id="5_k4h75"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
 [ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="7_73h1e"]
-[ext_resource type="Texture2D" uid="uid://djoe54ae3gp0a" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_06.png" id="7_jclwn"]
 [ext_resource type="Shader" uid="uid://b5ejlbt8ewfmo" path="res://Textures/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
 [sub_resource type="Curve" id="Curve_qvv7t"]
@@ -19,11 +19,6 @@ point_count = 4
 _limits = [0.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0.245902, 8.66031), 0.0, 0.0, 0, 0, Vector2(0.577869, 7.86641), 0.0, 0.0, 0, 0, Vector2(0.901639, 6.97328), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0b8a"]
-albedo_texture = ExtResource("7_jclwn")
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_x05rw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhsf8"]
 albedo_color = Color(1, 0.266667, 0, 1)
@@ -246,9 +241,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37114e-08, -0.540581, -1)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder/Camera3D/GrappleHookRope"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_n0b8a")
-mesh = SubResource("CylinderMesh_x05rw")
+transform = Transform3D(-1.31034e-07, -2.77938, 0, 2.9977, -1.2149e-07, 0, 0, 1.42109e-14, 6.47226, 0, 0, 0)
+mesh = ExtResource("3_k4h75")
 
 [node name="ObjectTool" type="Node3D" parent="CameraHolder/Camera3D"]
 visible = false
@@ -303,7 +297,7 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="FloorCheck" type="RayCast3D" parent="Raycasts"]
 exclude_parent = false
-target_position = Vector3(0, -2, 0)
+target_position = Vector3(0, -4, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(0, 0, 0.956863, 1)
 

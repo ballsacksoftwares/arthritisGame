@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://oj3blpxqf1bl"]
+[gd_scene load_steps=14 format=3 uid="uid://oj3blpxqf1bl"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_tvhlt"]
 [ext_resource type="Texture2D" uid="uid://cosanfwg57e4y" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_v37ox"]
 [ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="3_lilqa"]
 [ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="4_nyumb"]
-[ext_resource type="PackedScene" uid="uid://c6a31jit815m0" path="res://Scenes/level1.tscn" id="5_7tq46"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -135,36 +134,8 @@ collision_mask = 2
 size = Vector3(260, 1, 210)
 material = SubResource("StandardMaterial3D_st80m")
 
-[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.598, 8.11798, 23.0408)
-use_collision = true
-collision_mask = 2
-size = Vector3(260, 1, 210)
-material = SubResource("StandardMaterial3D_st80m")
-
 [node name="CSGBox3D12" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-4.37095e-08, 4.11201e-10, -1, 0.00940719, 0.999956, 0, 0.999956, -0.00940719, -4.37114e-08, -50.4298, 4.20324, -8.37507)
-use_collision = true
-collision_mask = 2
-size = Vector3(0.001, 8, 120.154)
-material = SubResource("StandardMaterial3D_st80m")
-
-[node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-4.37095e-08, 4.11201e-10, -1, 0.00940719, 0.999956, 0, 0.999956, -0.00940719, -4.37114e-08, -50.4298, 4.20324, 5.37068)
-use_collision = true
-collision_mask = 2
-size = Vector3(0.001, 8, 120.154)
-material = SubResource("StandardMaterial3D_st80m")
-
-[node name="CSGBox3D15" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-0.999956, 0.00940719, 8.74228e-08, 0.00940719, 0.999956, 0, -8.74189e-08, 8.22403e-10, -1, -91.0591, 4.20324, 5.37068)
-use_collision = true
-collision_mask = 2
-size = Vector3(0.001, 8, 120.154)
-material = SubResource("StandardMaterial3D_st80m")
-
-[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-0.999956, 0.00940719, 8.74228e-08, 0.00940719, 0.999956, 0, -8.74189e-08, 8.22403e-10, -1, -33.3363, 4.20324, 5.37068)
+transform = Transform3D(0.999956, -0.00940719, 0, 0.00940719, 0.999956, 0, 0, 0, 1, -2.09055, 4.20324, 0.864672)
 use_collision = true
 collision_mask = 2
 size = Vector3(0.001, 8, 120.154)
@@ -298,14 +269,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
 shape = SubResource("CylinderShape3D_vm7yl")
 
 [node name="Jumppad4" type="CSGCylinder3D" parent="Map/Jumppads"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.5403, 0.513623, -0.708649)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.5403, 0.513623, -65.0266)
 material_override = SubResource("StandardMaterial3D_rd3mg")
 use_collision = true
 collision_mask = 2
 radius = 2.0
 height = 0.15
 script = ExtResource("4_nyumb")
-scene = ExtResource("5_7tq46")
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad4"]
 collision_mask = 2

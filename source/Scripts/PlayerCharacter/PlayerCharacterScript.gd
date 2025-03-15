@@ -127,13 +127,10 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
 @onready var backpainMeter = $BackPain
-@export_group("dev tools")
-@export var infinitebackpain:bool
 var backpain = 0
 
 func giveBackPain(pain):
-	if infinitebackpain == false:
-		backpain = clamp(backpain+pain,0,100)
+	backpain = clamp(backpain+pain,0,INF)
 
 func _ready():
 	#set the start move speed
@@ -258,7 +255,8 @@ func inputManagement():
 					walkStateChanges()
 					
 			states.SLIDE:
-				giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
+				if floorCheck.is_colliding():
+					giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
 				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
@@ -304,7 +302,7 @@ func inputManagement():
 				pass 
 				
 			states.GRAPPLE:
-				giveBackPain(Vector2(velocity.x,velocity.z).length()/350)
+				giveBackPain(Vector2(velocity.x,velocity.z).length()/400)
 
 				if Input.is_action_just_pressed("jump"):
 					jump(grapHookSpeed/3, true)
@@ -626,7 +624,7 @@ func grappleHookRopeManagement(distToAnchorPoint : float):
 		if !grapHookRope.visible: grapHookRope.visible = true
 		grapHookRope.look_at(anchorPoint)
 		distToAnchorPoint = global_position.distance_to(anchorPoint)
-		grapHookRope.scale = Vector3(0.07, 0.18, distToAnchorPoint) #change the scale to make the rope take all the direction width
+		grapHookRope.scale = Vector3(0.2, 1, distToAnchorPoint) #change the scale to make the rope take all the direction width
 		
 		
 #theses functions manages the differents changes and appliments the character will go trought when changing his current state
@@ -706,7 +704,7 @@ func dashStateChanges():
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		
-		giveBackPain(25)
+		giveBackPain(15)
 		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
@@ -766,8 +764,12 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
-	if floorCheck.is_colliding() and abs(velocity.y) > 35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
-		giveBackPain(abs(velocity.y)/1.5)
+	if floorCheck.is_colliding() and velocity.y <= -35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
+		var fellVelocity = round(abs(velocity.y))
+		giveBackPain(fellVelocity/1.375)
+		
+		if fellVelocity > 75:
+			giveBackPain(30)
 		lastFallDamageTaken = Time.get_unix_time_from_system()
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):
