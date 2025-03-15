@@ -129,6 +129,7 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var backpainMeter = $BackPain
 var backpain = 0
 var dead = false
+var skeleton = preload("res://Scenes/skeleton.tscn")
 
 func giveBackPain(pain):
 	backpain = clamp(backpain+pain,0,INF)
@@ -171,8 +172,10 @@ func _ready():
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
 	
 func _process(_delta):
+	if dead:
+		pass
 	#the behaviours that is preferable to check every "visual" frame
-	if !pauseMenu.pauseMenuEnabled and not dead:
+	if !pauseMenu.pauseMenuEnabled:
 		backpainMeter.value = backpain
 		$BackPain/percent.text = str(int(backpain)) + "%"
 		
@@ -181,13 +184,19 @@ func _process(_delta):
 	
 	if backpain >= 100 and not dead:
 		dead = true
-		velocity *= 50
+		var skele = skeleton.instantiate()
+		skele.transform = self.transform
+		$"./../..".add_child(skele)
+		skele.linear_velocity = velocity/2
+
+		set_physics_process(false)
+		
 		await get_tree().create_timer(2).timeout
 		get_tree().reload_current_scene()
 	
 func _physics_process(delta):
 	#the behaviours that is preferable to check every "physics" frame
-	
+		
 	applies(delta)
 	
 	move(delta)
