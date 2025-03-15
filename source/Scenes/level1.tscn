@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://burj56u14sxpx"]
+[gd_scene load_steps=16 format=3 uid="uid://c6a31jit815m0"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_y4dr7"]
 [ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="2_didp7"]
@@ -86,7 +86,7 @@ material = SubResource("StandardMaterial3D_st80m")
 [node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
 transform = Transform3D(-4.37095e-08, 4.11201e-10, -1, 0.00940719, 0.999956, 0, 0.999956, -0.00940719, -4.37114e-08, -29.4344, 4.20324, -18.6181)
 use_collision = true
-collision_layer = 4
+collision_layer = 5
 collision_mask = 4
 size = Vector3(0.001, 8, 37.8808)
 material = SubResource("StandardMaterial3D_st80m")
@@ -250,18 +250,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Jumppads/Jumppad5/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.175135, 0)
 shape = SubResource("BoxShape3D_ul4ih")
-
-[node name="Barrel" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.0281, 5.59399, 13.0491)
-mesh = ExtResource("6_didp7")
-
-[node name="Barrel2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.9862, 4, -12.4028)
-mesh = ExtResource("6_didp7")
-
-[node name="Barrel3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14347, 3.7125, -22.5091)
-mesh = ExtResource("6_didp7")
 
 [node name="Barrel4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9026, -0.43048, 0, 0.43048, 0.9026, -21.4126, -2.1528, -18.184)
