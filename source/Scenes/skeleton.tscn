@@ -4,11 +4,12 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1k4by"]
 friction = 0.0
-bounce = 0.2
+bounce = 0.41
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dlanv"]
 
 [node name="skeleton" type="RigidBody3D"]
+transform = Transform3D(5.15131, 0, 0, 0, 5.15131, 0, 0, 0, 5.15131, 0, 0, 0)
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1k4by")
 gravity_scale = 0.589
@@ -16,7 +17,7 @@ center_of_mass_mode = 1
 angular_velocity = Vector3(-0.261799, 0.261799, 0.261799)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.0406263, 0, -0.037047, 0.00264511, 1.93387, 1.922e-05, -0.455111, 0.0112397, -0.00330695, 0.0867577, -0.0232673, 0.0448932)
+transform = Transform3D(-0.177824, 2.67755e-09, 1.99208, -0.0115778, -1.99997, -0.0010335, 1.99205, -0.0116239, 0.177821, 0.0867577, -0.0232673, 0.0448932)
 shape = SubResource("SphereShape3D_dlanv")
 
 [node name="skeleton" type="MeshInstance3D" parent="."]

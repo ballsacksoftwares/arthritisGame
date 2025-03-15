@@ -189,12 +189,12 @@ func _process(_delta):
 		var skele = skeleton.instantiate()
 		skele.transform = self.transform
 		$"./../..".add_child(skele)
-		skele.linear_velocity = velocity/2
-		OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
+		skele.linear_velocity = velocity/3
 
 		set_physics_process(false)
 		
 		await get_tree().create_timer(2).timeout
+		OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
 		get_tree().reload_current_scene()
 	
 func _physics_process(delta):
