@@ -255,7 +255,8 @@ func inputManagement():
 					walkStateChanges()
 					
 			states.SLIDE:
-				giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
+				if floorCheck.is_colliding():
+					giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
 				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
@@ -623,7 +624,7 @@ func grappleHookRopeManagement(distToAnchorPoint : float):
 		if !grapHookRope.visible: grapHookRope.visible = true
 		grapHookRope.look_at(anchorPoint)
 		distToAnchorPoint = global_position.distance_to(anchorPoint)
-		grapHookRope.scale = Vector3(0.07, 0.18, distToAnchorPoint) #change the scale to make the rope take all the direction width
+		grapHookRope.scale = Vector3(0.2, 1, distToAnchorPoint) #change the scale to make the rope take all the direction width
 		
 		
 #theses functions manages the differents changes and appliments the character will go trought when changing his current state
@@ -703,7 +704,7 @@ func dashStateChanges():
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		
-		giveBackPain(25)
+		giveBackPain(15)
 		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
@@ -764,7 +765,11 @@ func collisionHandling():
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
 	if floorCheck.is_colliding() and abs(velocity.y) > 35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
-		giveBackPain(abs(velocity.y)/1.5)
+		var fellVelocity = abs(velocity.y)
+		giveBackPain(abs(velocity.y)/1.375)
+		
+		if fellVelocity > 75:
+			giveBackPain(30)
 		lastFallDamageTaken = Time.get_unix_time_from_system()
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6a31jit815m0"]
+[gd_scene load_steps=18 format=3 uid="uid://c8247vmvwe24q"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_y4dr7"]
 [ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="2_didp7"]
 [ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="3_2a60c"]
+[ext_resource type="Texture2D" uid="uid://bxlhr0tusc84l" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_01.png" id="3_4iphx"]
 [ext_resource type="PackedScene" uid="uid://oj3blpxqf1bl" path="res://Scenes/TemplateMapScene.tscn" id="4_4iphx"]
-[ext_resource type="Script" uid="uid://bmywrl1etwrqk" path="res://Scenes/win.gd" id="5_jgkgd"]
+[ext_resource type="Script" path="res://Scenes/win.gd" id="5_jgkgd"]
 [ext_resource type="ArrayMesh" uid="uid://ci04u137kl6cs" path="res://Scenes/Barrel.obj" id="6_didp7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
@@ -22,6 +23,12 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
 albedo_texture = ExtResource("2_didp7")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgkgd"]
+albedo_texture = ExtResource("3_4iphx")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -89,7 +96,7 @@ use_collision = true
 collision_layer = 5
 collision_mask = 4
 size = Vector3(0.001, 8, 37.8808)
-material = SubResource("StandardMaterial3D_st80m")
+material = SubResource("StandardMaterial3D_jgkgd")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Map/Blocks"]
 transform = Transform3D(-4.37114e-08, 0.642788, 0.766044, 0, 0.766044, -0.642788, -1, -2.80971e-08, -3.34849e-08, -163.619, 21.5158, -67.1354)
