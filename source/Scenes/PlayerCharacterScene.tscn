@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=29 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://dhkqm1wj2jool" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://bfu47ayhd0561" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
 [ext_resource type="Script" uid="uid://bbn3usomuucnf" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" uid="uid://0w2ryllnoi3d" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
+[ext_resource type="Texture2D" uid="uid://djt6k1cefv8mu" path="res://Textures/backpainMeter.png" id="5_k4h75"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
 [ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="7_73h1e"]
 [ext_resource type="Texture2D" uid="uid://djoe54ae3gp0a" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_06.png" id="7_jclwn"]
@@ -150,8 +151,8 @@ platform_floor_layers = 4294901761
 script = ExtResource("1_5dbx1")
 desiredMoveSpeedCurve = SubResource("Curve_qvv7t")
 maxSpeed = 80.0
-walkSpeed = 20.0
-runSpeed = 20.0
+walkSpeed = 25.0
+runSpeed = 25.0
 crouchSpeed = 7.0
 slideSpeedAddon = 8.0
 dashSpeed = 130.0
@@ -295,13 +296,20 @@ target_position = Vector3(0, -4, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(0, 0, 0.956863, 1)
 
-[node name="BackPain" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BackPain" type="TextureProgressBar" parent="."]
+offset_left = 944.0
+offset_top = 117.0
+offset_right = 3228.0
+offset_bottom = 6205.0
+scale = Vector2(0.0725939, 0.0738499)
+fill_mode = 3
+texture_under = ExtResource("5_k4h75")
+texture_progress = ExtResource("5_k4h75")
+tint_over = Color(0.595429, 0.518011, 0.467242, 1)
+tint_progress = Color(1, 0.109804, 0.188235, 1)
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
