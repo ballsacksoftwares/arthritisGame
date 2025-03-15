@@ -264,6 +264,7 @@ func inputManagement():
 					slideStateChanges()
 				
 				if Input.is_action_just_pressed("jump"):
+					giveBackPain(5)
 					jump(0.0, false)
 					jumpBuffering()
 				
@@ -765,8 +766,9 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
-	if floorCheck.is_colliding() and abs(velocity.y) > 25 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
-		giveBackPain(abs(velocity.y)/3)
+	if floorCheck.is_colliding() and abs(velocity.y) > 35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
+		giveBackPain(abs(velocity.y)/1.5)
+		lastFallDamageTaken = Time.get_unix_time_from_system()
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):
 	#this function handle the knockback mechanic
