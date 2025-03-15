@@ -131,6 +131,7 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var backpainMeter = $BackPain
 var backpain = 0
 var dead = false
+var skeleton = preload("res://Scenes/skeleton.tscn")
 
 func giveBackPain(pain):
 	backpain = clamp(backpain+pain,0,INF)
@@ -185,8 +186,14 @@ func _process(_delta):
 	
 	if backpain >= 100 and not dead:
 		dead = true
-		velocity *= 50
+		var skele = skeleton.instantiate()
+		skele.transform = self.transform
+		$"./../..".add_child(skele)
+		skele.linear_velocity = velocity/2
 		OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
+
+		set_physics_process(false)
+		
 		await get_tree().create_timer(2).timeout
 		get_tree().reload_current_scene()
 	
