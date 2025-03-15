@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6a31jit815m0"]
+[gd_scene load_steps=18 format=3 uid="uid://bj85fcqsppefe"]
 
-[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_y4dr7"]
-[ext_resource type="Texture2D" uid="uid://bxlhr0tusc84l" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_01.png" id="2_2a60c"]
-[ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="2_didp7"]
-[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="3_2a60c"]
-[ext_resource type="PackedScene" uid="uid://bj85fcqsppefe" path="res://Scenes/level2.tscn" id="6_2a60c"]
-[ext_resource type="ArrayMesh" uid="uid://ci04u137kl6cs" path="res://Scenes/Barrel.obj" id="6_didp7"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_styii"]
+[ext_resource type="Texture2D" uid="uid://bxlhr0tusc84l" path="res://Textures/Textures/kenney_prototype_textures/orange/texture_01.png" id="2_lgosu"]
+[ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="3_mhlpv"]
+[ext_resource type="ArrayMesh" uid="uid://ci04u137kl6cs" path="res://Scenes/Barrel.obj" id="4_ng020"]
+[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="5_vn2uo"]
+[ext_resource type="PackedScene" uid="uid://c6a31jit815m0" path="res://Scenes/level1.tscn" id="6_mtqcm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,19 +33,19 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgkgd"]
-albedo_texture = ExtResource("2_2a60c")
+albedo_texture = ExtResource("2_lgosu")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygjqq"]
-albedo_texture = ExtResource("2_didp7")
+albedo_texture = ExtResource("3_mhlpv")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_linps"]
-albedo_texture = ExtResource("2_didp7")
+albedo_texture = ExtResource("3_mhlpv")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -71,7 +71,7 @@ shadow_enabled = true
 
 [node name="PlayerCharacter" type="Node3D" parent="."]
 
-[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_y4dr7")]
+[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_styii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8026, 1.70622, 2.09406)
 timeBeforeCanSlideAgain = 0.0
 infinitebackpain = false
@@ -255,14 +255,11 @@ size = Vector3(16.975, 0.5, 16.558)
 
 [node name="Barrel4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9026, -0.43048, 0, 0.43048, 0.9026, -21.4126, -2.1528, -18.184)
-mesh = ExtResource("6_didp7")
+mesh = ExtResource("4_ng020")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-2.4657e-07, 0, 1, 0, 3.33878, 0, -5.64086, 0, -4.37114e-08, -43.8303, 2.52555, 0.915491)
-text = "mankind is arthritis
-you have arthritis
-i am bleeding inside
-hackita haves my childrne"
+text = "NO YOU DIDNT FUCKING DIE!"
 
 [node name="Jumppad4" type="CSGCylinder3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -51.8275, 66.0447, 189.948)
@@ -271,8 +268,8 @@ use_collision = true
 collision_mask = 2
 radius = 25.0
 height = 0.15
-script = ExtResource("3_2a60c")
-scene = ExtResource("6_2a60c")
+script = ExtResource("5_vn2uo")
+scene = ExtResource("6_mtqcm")
 
 [node name="Area3D" type="Area3D" parent="Jumppad4"]
 transform = Transform3D(15.45, 0, 0, 0, 0.999999, 0, 0, 0, 15.45, 0, 0, 0)
