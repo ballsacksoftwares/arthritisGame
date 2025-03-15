@@ -128,6 +128,7 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var pauseMenu = $PauseMenu
 @onready var backpainMeter = $BackPain
 var backpain = 0
+var dead = false
 
 func giveBackPain(pain):
 	backpain = clamp(backpain+pain,0,INF)
@@ -171,14 +172,17 @@ func _ready():
 	
 func _process(_delta):
 	#the behaviours that is preferable to check every "visual" frame
-	if !pauseMenu.pauseMenuEnabled:
+	if !pauseMenu.pauseMenuEnabled and not dead:
 		backpainMeter.value = backpain
 		$BackPain/percent.text = str(int(backpain)) + "%"
 		
 		inputManagement()
 		displayStats()
 	
-	if backpain >= 100:
+	if backpain >= 100 and not dead:
+		dead = true
+		velocity *= 50
+		await get_tree().create_timer(2).timeout
 		get_tree().reload_current_scene()
 	
 func _physics_process(delta):
@@ -202,7 +206,7 @@ func inputManagement():
 	if canInput:
 		match currentState:
 			states.IDLE:
-				backpain = clamp(backpain-.01,0,100)
+				backpain = clamp(backpain-.025,0,100)
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()

@@ -58,7 +58,6 @@ custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_erykl")
 theme_override_font_sizes/font_size = 55
-disabled = true
 text = "Retry"
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]

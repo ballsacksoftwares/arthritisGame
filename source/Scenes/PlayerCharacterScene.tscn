@@ -193,7 +193,6 @@ timeBeforeCanGrappleAgain = 0.5
 grappleLaunchJumpVelocity = 8.0
 onFloorKnockbackDivider = 3.5
 wallGravityMultiplier = 0.7
-infinitebackpain = true
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.540581, 0)
@@ -337,7 +336,6 @@ label_settings = SubResource("LabelSettings_ntc8i")
 horizontal_alignment = 1
 
 [node name="HUD" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,6 +375,7 @@ points = PackedVector2Array(-5, 0, -15, 0)
 width = 2.0
 
 [node name="Grapple" type="Control" parent="HUD/Reticle"]
+visible = false
 layout_mode = 2
 
 [node name="TopLine" type="Line2D" parent="HUD/Reticle/Grapple"]
@@ -420,6 +419,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+visible = false
 layout_mode = 0
 offset_left = 7.0
 offset_right = 1187.0
