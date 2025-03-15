@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=31 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://dhkqm1wj2jool" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://bfu47ayhd0561" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
@@ -121,6 +121,18 @@ albedo_color = Color(0.196078, 0.223529, 1, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p2iaj"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_k4h75"]
+font = ExtResource("7_73h1e")
+font_size = 200
+outline_size = 100
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ntc8i"]
+font = ExtResource("7_73h1e")
+font_size = 750
+outline_size = 100
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Curve" id="Curve_73h1e"]
 _data = [Vector2(0.779359, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -184,7 +196,6 @@ distToStopGrappleOnFloor = 10.0
 distToStopGrappleIAir = 5.0
 timeBeforeCanGrappleAgain = 0.5
 grappleLaunchJumpVelocity = 8.0
-downDirJump = true
 onFloorKnockbackDivider = 3.5
 wallGravityMultiplier = 0.7
 
@@ -291,21 +302,44 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="FloorCheck" type="RayCast3D" parent="Raycasts"]
 exclude_parent = false
-target_position = Vector3(0, -4, 0)
+target_position = Vector3(0, -2, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(0, 0, 0.956863, 1)
 
 [node name="BackPain" type="TextureProgressBar" parent="."]
-offset_left = 944.0
-offset_top = 117.0
-offset_right = 3228.0
-offset_bottom = 6205.0
-scale = Vector2(0.0725939, 0.0738499)
+offset_left = 1513.0
+offset_top = 67.0
+offset_right = 3797.0
+offset_bottom = 6155.0
+scale = Vector2(0.152594, 0.15385)
 fill_mode = 3
 texture_under = ExtResource("5_k4h75")
 texture_progress = ExtResource("5_k4h75")
 tint_over = Color(0.595429, 0.518011, 0.467242, 1)
 tint_progress = Color(1, 0.109804, 0.188235, 1)
+
+[node name="Label" type="Label" parent="BackPain"]
+layout_mode = 0
+offset_left = 551.011
+offset_top = 5348.69
+offset_right = 1631.01
+offset_bottom = 5613.69
+theme_override_fonts/font = ExtResource("7_73h1e")
+theme_override_font_sizes/font_size = 200
+text = "back pain"
+label_settings = SubResource("LabelSettings_k4h75")
+
+[node name="percent" type="Label" parent="BackPain"]
+layout_mode = 0
+offset_left = 220.405
+offset_top = 5429.94
+offset_right = 2020.41
+offset_bottom = 6419.94
+theme_override_fonts/font = ExtResource("7_73h1e")
+theme_override_font_sizes/font_size = 300
+text = "###%"
+label_settings = SubResource("LabelSettings_ntc8i")
+horizontal_alignment = 1
 
 [node name="HUD" type="Control" parent="."]
 visible = false

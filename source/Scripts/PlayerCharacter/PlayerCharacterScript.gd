@@ -46,6 +46,7 @@ var slopeAngle #angle of the slope the character is on
 var canInput : bool 
 var collisionInfo
 var wasOnFloor : bool
+var lastFallDamageTaken = Time.get_unix_time_from_system()
 
 #jump variables
 @export_group("jump variables")
@@ -170,13 +171,15 @@ func _ready():
 	
 func _process(_delta):
 	#the behaviours that is preferable to check every "visual" frame
-	
 	if !pauseMenu.pauseMenuEnabled:
-		backpain = clamp(backpain-((backpain/15)*_delta),0,100)
 		backpainMeter.value = backpain
+		$BackPain/percent.text = str(int(backpain)) + "%"
 		
 		inputManagement()
 		displayStats()
+	
+	if backpain >= 100:
+		get_tree().reload_current_scene()
 	
 func _physics_process(delta):
 	#the behaviours that is preferable to check every "physics" frame
@@ -199,6 +202,7 @@ func inputManagement():
 	if canInput:
 		match currentState:
 			states.IDLE:
+				backpain = clamp(backpain-.01,0,100)
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()
@@ -251,7 +255,7 @@ func inputManagement():
 					walkStateChanges()
 					
 			states.SLIDE:
-				giveBackPain(.2)
+				giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
 				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
@@ -296,6 +300,8 @@ func inputManagement():
 				pass 
 				
 			states.GRAPPLE:
+				giveBackPain(Vector2(velocity.x,velocity.z).length()/350)
+
 				if Input.is_action_just_pressed("jump"):
 					jump(grapHookSpeed/3, true)
 					
@@ -756,6 +762,8 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
+	if floorCheck.is_colliding() and abs(velocity.y) > 25 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
+		giveBackPain(abs(velocity.y)/3)
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):
 	#this function handle the knockback mechanic
