@@ -8,5 +8,4 @@ class_name Winpad
 @export var scene : Resource
 
 func _on_area_3d_area_entered(area):
-	if area.get_parent() is PlayerCharacter:
-		get_tree().change_scene_to_packed(scene)
+	get_tree().reload_current_scene()

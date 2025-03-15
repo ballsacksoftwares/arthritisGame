@@ -127,10 +127,13 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
 @onready var backpainMeter = $BackPain
+@export_group("dev tools")
+@export var infinitebackpain:bool
 var backpain = 0
 
 func giveBackPain(pain):
-	backpain = clamp(backpain+pain,0,100)
+	if infinitebackpain == false:
+		backpain = clamp(backpain+pain,0,100)
 
 func _ready():
 	#set the start move speed

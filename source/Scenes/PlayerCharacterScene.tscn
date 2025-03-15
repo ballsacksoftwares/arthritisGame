@@ -198,6 +198,7 @@ timeBeforeCanGrappleAgain = 0.5
 grappleLaunchJumpVelocity = 8.0
 onFloorKnockbackDivider = 3.5
 wallGravityMultiplier = 0.7
+infinitebackpain = true
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.540581, 0)
