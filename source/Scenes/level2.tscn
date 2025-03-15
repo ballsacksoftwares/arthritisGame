@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://da5vaj27cas7l"]
+[gd_scene load_steps=13 format=3 uid="uid://da5vaj27cas7l"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_styii"]
+[ext_resource type="AudioStream" uid="uid://qiahkuet16ki" path="res://Scenes/DangerHigh_120_C_Sfx_02.wav" id="2_1k4by"]
 [ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="5_vn2uo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
@@ -57,6 +58,7 @@ shadow_enabled = true
 
 [node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_styii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8026, 1.70622, 2.09406)
+music = ExtResource("2_1k4by")
 timeBeforeCanSlideAgain = 0.0
 
 [node name="Map" type="Node3D" parent="."]
@@ -92,10 +94,24 @@ size = Vector3(33.067, 173.264, 7.64468)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.0599, -8.19218, 86.2444)
+transform = Transform3D(0.982421, 0.186678, 0, -0.186678, 0.982421, 0, 0, 0, 1, -102.369, -120.333, 86.2444)
 use_collision = true
 collision_mask = 2
-size = Vector3(33.067, 235.777, 44.4351)
+size = Vector3(33.067, 464.072, 44.4351)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.642492, 0.122086, 0.756504, -0.186678, 0.982421, 0, -0.743206, -0.141223, 0.653989, -257.853, -120.333, -87.1011)
+use_collision = true
+collision_mask = 2
+size = Vector3(33.067, 464.072, 44.4351)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-0.831984, -0.158093, 0.531798, -0.186678, 0.982421, 9.74519e-09, -0.522449, -0.0992751, -0.846871, -437.2, -303.803, 43.193)
+use_collision = true
+collision_mask = 2
+size = Vector3(94, 826, 100)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="Label3D" type="Label3D" parent="."]
