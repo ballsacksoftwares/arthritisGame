@@ -133,8 +133,9 @@ var backpain = 0
 var dead = false
 var skeleton = preload("res://Scenes/skeleton.tscn")
 
-func giveBackPain(pain):
-	backpain = clamp(backpain+pain,0,INF)
+func giveBackPain(pain,delta):
+	backpainMeter.shake(pain,.5)
+	backpain = clamp(backpain+(pain*delta),0,INF)
 
 func _ready():
 	$AudioStreamPlayer.stream = music
@@ -175,17 +176,24 @@ func _ready():
 	#set the mesh scale of the character
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
 	
-func _process(_delta):
+func _process(delta):
 	#the behaviours that is preferable to check every "visual" frame
-	if !pauseMenu.pauseMenuEnabled and not dead:
+	if !pauseMenu.pauseMenuEnabled:
+		if dead:
+			backpain = 100
+		
+		backpainMeter.tint_progress = Color(backpain/100,1-backpain/100,0)
 		backpainMeter.value = backpain
 		$BackPain/percent.text = str(int(backpain)) + "%"
 		
-		inputManagement()
-		displayStats()
+		if not dead:
+			inputManagement(delta)
+			displayStats()
 	
 	if backpain >= 100 and not dead:
 		dead = true
+		backpain = 100
+		backpainMeter.value = 100
 		var skele = skeleton.instantiate()
 		skele.transform = self.transform
 		$"./../..".add_child(skele)
@@ -193,8 +201,9 @@ func _process(_delta):
 
 		set_physics_process(false)
 		
+		backpainMeter.shake(100,1.5)
 		await get_tree().create_timer(2).timeout
-		OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
+		#OS.shell_open("https://www.youtube.com/watch?v=o-YBDTqX_ZU") 
 		get_tree().reload_current_scene()
 	
 func _physics_process(delta):
@@ -210,15 +219,17 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-func inputManagement():
+func inputManagement(delta):
 	#for each state, check the possibles actions available
 	#This allow to have a good control of the controller behaviour, because you can easely check the actions possibls, 
 	#add or remove some, and it prevent certain actions from being played when they shouldn't be
 	
+	#delta = 1/60
+	
 	if canInput:
 		match currentState:
 			states.IDLE:
-				backpain = clamp(backpain-.025,0,100)
+				backpain = clamp(backpain-(2*delta),0,100)
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()
@@ -272,13 +283,13 @@ func inputManagement():
 					
 			states.SLIDE:
 				if floorCheck.is_colliding():
-					giveBackPain(Vector2(velocity.x,velocity.z).length()/500)
+					giveBackPain(Vector2(velocity.x,velocity.z).length()/2,delta)
 				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
 				
 				if Input.is_action_just_pressed("jump"):
-					giveBackPain(5)
+					giveBackPain(5,delta)
 					jump(0.0, false)
 					jumpBuffering()
 				
@@ -318,7 +329,7 @@ func inputManagement():
 				pass 
 				
 			states.GRAPPLE:
-				giveBackPain(Vector2(velocity.x,velocity.z).length()/400)
+				giveBackPain(Vector2(velocity.x,velocity.z).length()/1.75,delta)
 
 				if Input.is_action_just_pressed("jump"):
 					jump(grapHookSpeed/3, true)
@@ -720,7 +731,7 @@ func dashStateChanges():
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		
-		giveBackPain(15)
+		giveBackPain(15,1)
 		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
@@ -782,10 +793,10 @@ func collisionHandling():
 			else: canWallRun = false
 	if floorCheck.is_colliding() and velocity.y <= -35 and Time.get_unix_time_from_system() - lastFallDamageTaken > 1:
 		var fellVelocity = round(abs(velocity.y))
-		giveBackPain(fellVelocity/1.375)
+		giveBackPain(fellVelocity/1.375,1)
 		
 		if fellVelocity > 75:
-			giveBackPain(30)
+			giveBackPain(30,1)
 		lastFallDamageTaken = Time.get_unix_time_from_system()
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):

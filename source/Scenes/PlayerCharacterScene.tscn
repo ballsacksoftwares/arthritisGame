@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=30 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://dhkqm1wj2jool" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://bfu47ayhd0561" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0w2ryllnoi3d" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
 [ext_resource type="Texture2D" uid="uid://djt6k1cefv8mu" path="res://Textures/backpainMeter.png" id="5_k4h75"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
+[ext_resource type="Script" uid="uid://dq02a26ms0it2" path="res://Scenes/back_pain.gd" id="6_ntc8i"]
 [ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="7_73h1e"]
 [ext_resource type="Shader" uid="uid://b5ejlbt8ewfmo" path="res://Textures/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
@@ -313,8 +314,9 @@ texture_under = ExtResource("5_k4h75")
 texture_progress = ExtResource("5_k4h75")
 tint_over = Color(0.595429, 0.518011, 0.467242, 1)
 tint_progress = Color(1, 0.109804, 0.188235, 1)
+script = ExtResource("6_ntc8i")
 
-[node name="Label" type="Label" parent="BackPain"]
+[node name="title" type="Label" parent="BackPain"]
 layout_mode = 0
 offset_left = 551.011
 offset_top = 5348.69

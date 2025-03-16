@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://celm26gbrje74"]
+[gd_scene load_steps=13 format=3 uid="uid://celm26gbrje74"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_styii"]
 [ext_resource type="AudioStream" uid="uid://qiahkuet16ki" path="res://Scenes/DangerHigh_120_C_Sfx_02.wav" id="2_1k4by"]
+[ext_resource type="Texture2D" uid="uid://uqck4feey5v2" path="res://Textures/Brick/Brick_10-128x128.png" id="3_onqnr"]
 [ext_resource type="PackedScene" uid="uid://bwesx33qa0fi0" path="res://Scenes/hospital.glb" id="4_dlanv"]
-[ext_resource type="Resource" uid="uid://clulwyx4nxpva" path="res://Scenes/level3.tscn" id="4_onqnr"]
-[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="5_vn2uo"]
+[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/WinPad.gd" id="5_vn2uo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,11 +22,8 @@ fog_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2a60c"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4iphx"]
-load_path = "res://.godot/imported/texture_03.png-4b40accf87ed2ee28023461b86aabd4c.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
-albedo_texture = SubResource("CompressedTexture2D_4iphx")
+albedo_texture = ExtResource("3_onqnr")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -59,6 +56,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8026, 1.70622, 2.09406)
 music = ExtResource("2_1k4by")
 timeBeforeCanSlideAgain = 0.0
+
+[node name="AudioStreamPlayer" parent="PlayerCharacter/PlayerCharacterV2" index="0"]
+volume_db = -15.063
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -180,10 +180,10 @@ collision_mask = 2
 radius = 25.0
 height = 0.15
 script = ExtResource("5_vn2uo")
-scene = ExtResource("4_onqnr")
+scene = "level3"
 
 [node name="Area3D" type="Area3D" parent="Jumppad4"]
-transform = Transform3D(15.45, 0, 0, 0, 0.999999, 0, 0, 0, 15.45, 0, 0, 0)
+transform = Transform3D(15.3757, 1.13687e-13, 0, -5.68434e-14, 22.8564, 0, 0, 0, 15.3757, 0.14991, -1.67947, -0.851871)
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Jumppad4/Area3D"]
@@ -194,3 +194,5 @@ shape = SubResource("CylinderShape3D_didp7")
 transform = Transform3D(1.40969, 0, 7.51517, 0, 7.64625, 0, -7.51517, 0, 1.40969, -479.189, 103.584, -26.2029)
 
 [connection signal="area_entered" from="Jumppad4/Area3D" to="Jumppad4" method="_on_area_3d_area_entered"]
+
+[editable path="PlayerCharacter/PlayerCharacterV2"]

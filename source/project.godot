@@ -11,14 +11,17 @@ config_version=5
 [application]
 
 config/name="arthritisGame"
-run/main_scene="uid://c6a31jit815m0"
+run/main_scene="uid://chgr5nsmxi5ql"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Textures/TemplateImages/Icon.png"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://s0o7aupncy18"
+config/icon="uid://s0o7aupncy18"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [dotnet]

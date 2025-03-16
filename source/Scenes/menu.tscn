@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://chgr5nsmxi5ql"]
+[gd_scene load_steps=23 format=3 uid="uid://chgr5nsmxi5ql"]
 
 [ext_resource type="LabelSettings" uid="uid://d1rg1oruwidf" path="res://Textures/Fonts/LabelFontTemplate.tres" id="1_rfqti"]
 [ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="2_g8i7c"]
@@ -9,8 +9,7 @@
 [ext_resource type="Script" uid="uid://byxhlulqu1pmx" path="res://Scenes/run.gd" id="4_g8i7c"]
 [ext_resource type="ArrayMesh" uid="uid://c7rqekuxb06ih" path="res://Assets/uploads_files_734240_Skeleton.obj" id="5_q3rjx"]
 [ext_resource type="ArrayMesh" uid="uid://ci04u137kl6cs" path="res://Scenes/Barrel.obj" id="5_rfqti"]
-[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/JumppadScript.gd" id="6_g8i7c"]
-[ext_resource type="Resource" uid="uid://celm26gbrje74" path="res://Scenes/level2.tscn" id="7_23t3j"]
+[ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/WinPad.gd" id="6_g8i7c"]
 [ext_resource type="AudioStream" uid="uid://fyhm0csmswmg" path="res://Scenes/New_Project.mp3" id="8_q3rjx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
@@ -430,7 +429,6 @@ collision_mask = 2
 radius = 25.0
 height = 0.15
 script = ExtResource("6_g8i7c")
-scene = ExtResource("7_23t3j")
 
 [node name="Area3D" type="Area3D" parent="Jumppad4"]
 transform = Transform3D(15.45, 0, 0, 0, 0.999999, 0, 0, 0, 15.45, 0, 0, 0)
