@@ -13,6 +13,13 @@ enum states
 var currentState 
 
 #move variables
+@export_group("backpain properties")
+## if you can get back pain or not
+@export var backPainEnabled:bool = true
+## multiplies how much back pain you receive/relive
+@export var backPainMultiplier:float = 1
+## the maximum amount of back pain you can get before you die
+@export var maxBackPain:int = 100
 @export_group("musical harmonies")
 @export var music:Resource
 @export_group("move variables")
@@ -134,8 +141,10 @@ var dead = false
 var skeleton = preload("res://Scenes/skeleton.tscn")
 
 func giveBackPain(pain,delta):
+	pain *= backPainMultiplier
+	
 	backpainMeter.shake(pain,.5)
-	backpain = clamp(backpain+(pain*delta),0,INF)
+	backpain = clamp(backpain+(pain*delta),0,maxBackPain)
 
 func _ready():
 	$AudioStreamPlayer.stream = music
@@ -176,13 +185,19 @@ func _ready():
 	#set the mesh scale of the character
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
 	
+	#initalize back pain thingys
+	if !backPainEnabled:
+		backpainMeter.visible = false
+	
+	backpainMeter.max_value = maxBackPain
+	
 func _process(delta):
 	#the behaviours that is preferable to check every "visual" frame
 	if !pauseMenu.pauseMenuEnabled:
 		if dead:
-			backpain = 100
+			backpain = maxBackPain
 		
-		backpainMeter.tint_progress = Color(backpain/100,1-backpain/100,0)
+		backpainMeter.tint_progress = Color(backpain/maxBackPain,1-backpain/maxBackPain,0)
 		backpainMeter.value = backpain
 		$BackPain/percent.text = str(int(backpain)) + "%"
 		
@@ -190,14 +205,15 @@ func _process(delta):
 			inputManagement(delta)
 			displayStats()
 	
-	if backpain >= 100 and not dead:
+	if backPainEnabled and backpain >= maxBackPain and not dead:
 		dead = true
-		backpain = 100
-		backpainMeter.value = 100
+		backpain = maxBackPain
+		backpainMeter.value = maxBackPain
 		var skele = skeleton.instantiate()
-		skele.transform = self.transform
+		skele.position = self.position
+		skele.rotation = self.rotation
 		$"./../..".add_child(skele)
-		skele.linear_velocity = velocity/3
+		skele.linear_velocity = velocity/4
 
 		set_physics_process(false)
 		
@@ -229,7 +245,7 @@ func inputManagement(delta):
 	if canInput:
 		match currentState:
 			states.IDLE:
-				backpain = clamp(backpain-(2*delta),0,100)
+				backpain = clamp(backpain-((2*delta)*backPainMultiplier),0,maxBackPain)
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()
