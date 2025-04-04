@@ -155,7 +155,7 @@ collision_layer = 2
 platform_floor_layers = 4294901761
 script = ExtResource("1_5dbx1")
 desiredMoveSpeedCurve = SubResource("Curve_qvv7t")
-maxSpeed = 80.0
+maxSpeed = 99999.0
 walkSpeed = 25.0
 runSpeed = 25.0
 crouchSpeed = 7.0
@@ -180,10 +180,10 @@ maxSlopeAngle = 10.0
 wallJumpVelocity = 3.0
 dashTime = 0.3
 nbDashAllowed = 3
-timeBeforeCanDashAgain = 1.0
+timeBeforeCanDashAgain = 0.5
 timeBefReloadDash = 0.6
 grapHookMaxDist = 800.0
-grapHookSpeed = 80.0
+grapHookSpeed = 100.0
 grapHookAccel = 6.0
 distToStopGrappleOnFloor = 10.0
 distToStopGrappleIAir = 5.0
@@ -193,6 +193,7 @@ onFloorKnockbackDivider = 3.5
 wallGravityMultiplier = 0.7
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.540581, 0)
@@ -267,6 +268,7 @@ libraries = {
 
 [node name="standingHitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_5yjma")
+debug_color = Color(5.10186e-06, 0.586186, 0.773304, 0.42)
 
 [node name="crouchingHitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
@@ -284,6 +286,7 @@ collision_mask = 4
 
 [node name="standingHitbox2" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_5yjma")
+debug_color = Color(5.10186e-06, 0.586186, 0.773304, 0.42)
 
 [node name="Raycasts" type="Node3D" parent="."]
 
@@ -420,7 +423,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-visible = false
 layout_mode = 0
 offset_left = 7.0
 offset_right = 1187.0

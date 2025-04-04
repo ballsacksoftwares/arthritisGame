@@ -170,6 +170,8 @@ func _ready():
 	canWallRun = false
 	canInput = true
 	
+	timeBeforeCanDashAgain = 0
+	
 	#disable the crouch hitbox, enable is standing one
 	if !crouchHitbox.disabled: crouchHitbox.disabled = true 
 	if standHitbox.disabled: standHitbox.disabled = false
@@ -193,6 +195,9 @@ func _ready():
 	
 func _process(delta):
 	#the behaviours that is preferable to check every "visual" frame
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
+					
 	if !pauseMenu.pauseMenuEnabled:
 		if dead:
 			backpain = maxBackPain
@@ -245,7 +250,7 @@ func inputManagement(delta):
 	if canInput:
 		match currentState:
 			states.IDLE:
-				backpain = clamp(backpain-((2*delta)*backPainMultiplier),0,maxBackPain)
+				backpain = clamp(backpain-((3*delta)*backPainMultiplier),0,maxBackPain)
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()
@@ -257,6 +262,7 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.WALK:
+				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run"):
 					runStateChanges()
 				
@@ -274,6 +280,7 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.RUN:
+				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run"):
 					walkStateChanges()
 				
@@ -291,6 +298,7 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.CROUCH: 
+				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run") and !ceilingCheck.is_colliding():
 					walkStateChanges()
 				
@@ -298,6 +306,7 @@ func inputManagement(delta):
 					walkStateChanges()
 					
 			states.SLIDE:
+				timeBeforeCanDashAgain = 0
 				if floorCheck.is_colliding():
 					giveBackPain(Vector2(velocity.x,velocity.z).length()/2,delta)
 				
@@ -342,7 +351,7 @@ func inputManagement(delta):
 					jump(0.0, false)
 					
 			states.DASH:
-				pass 
+				pass
 				
 			states.GRAPPLE:
 				giveBackPain(Vector2(velocity.x,velocity.z).length()/1.75,delta)
@@ -454,8 +463,14 @@ func applies(delta):
 			
 			if dashTime > 0: dashTime -= delta
 			
+			var cancelleddash = false
+			if Input.is_action_just_pressed("jump") and floorCheck.is_colliding():
+					cancelleddash = true
+					dashTime = 0
+					jump(0.0, false, true)
+			
 			#the character cannot dash anymore, change to corresponding variables, and go back to run state
-			if dashTime <= 0: 
+			if dashTime <= 0 and not cancelleddash: 
 				velocity = velocityPreDash #go back to pre dash velocity
 				canInput = true 
 				timeBeforeCanDashAgain = timeBeforeCanDashAgainRef
@@ -589,9 +604,8 @@ func move(delta):
 	lastFramePosition = position
 	wasOnFloor = !is_on_floor()
 			
-func jump(jumpBoostValue : float, isJumpBoost : bool): 
+func jump(jumpBoostValue : float, isJumpBoost : bool, superjump=null): 
 	#this function manage the jump behaviour, depending of the different variables and states the character is
-	
 	var canJump : bool = false #jump condition
 	
 	#the jump can only be applied if the player character is pulled up
@@ -630,6 +644,10 @@ func jump(jumpBoostValue : float, isJumpBoost : bool):
 		if isJumpBoost: nbJumpsInAirAllowed = nbJumpsInAirAllowedRef
 		currentState = states.JUMP
 		velocity.y = jumpVelocity + jumpBoostValue #apply directly jump velocity to y axis velocity, to give the character instant vertical forcez
+		if superjump:
+			velocity *= 2
+			currentState = states.INAIR
+			canInput = true
 		canJump = false 
 		
 func jumpBuffering():
@@ -743,7 +761,10 @@ func dashStateChanges():
 	if inputDirection != Vector2.ZERO and timeBeforeCanDashAgain <= 0.0 and nbDashAllowed > 0:
 		currentState = states.DASH
 		nbDashAllowed -= 1
-		moveSpeed = dashSpeed 
+		velocity.y = 0
+		moveSpeed = dashSpeed
+		if velocity.length() > moveSpeed:
+			moveSpeed = velocity.length()
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		

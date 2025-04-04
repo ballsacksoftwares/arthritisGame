@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6a31jit815m0"]
+[gd_scene load_steps=19 format=3 uid="uid://c6a31jit815m0"]
 
+[ext_resource type="PackedScene" uid="uid://c75mkg40sta2d" path="res://Scenes/timer.tscn" id="1_4iphx"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_y4dr7"]
 [ext_resource type="AudioStream" uid="uid://ikl866364c7g" path="res://Scenes/New_Project (1) (1).mp3" id="2_4iphx"]
 [ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Textures/Textures/kenney_prototype_textures/dark/texture_03.png" id="2_didp7"]
@@ -59,7 +60,10 @@ emission_energy_multiplier = 2.8
 height = 0.15
 radius = 2.0
 
-[node name="TemplateMap" type="Node3D"]
+[node name="level1" type="Node3D"]
+
+[node name="timer" parent="." instance=ExtResource("1_4iphx")]
+z_index = 1555
 
 [node name="Environment" type="Node3D" parent="."]
 

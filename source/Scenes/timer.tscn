@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c75mkg40sta2d"]
+
+[ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="1_ycw00"]
+[ext_resource type="Script" uid="uid://bhaflqesbvjt5" path="res://Scenes/timer.gd" id="2_4hjkw"]
+[ext_resource type="Script" uid="uid://cciobgnasta07" path="res://Scenes/globaltimedisplay.gd" id="2_6wwcs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mxtnu"]
+font = ExtResource("1_ycw00")
+font_size = 90
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ycw00"]
+font = ExtResource("1_ycw00")
+font_size = 45
+font_color = Color(0.638661, 0.638661, 0.638661, 1)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="timer" type="Control"]
+visibility_layer = 512
+z_index = 5
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="globaltime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 917.0
+offset_right = 547.0
+offset_bottom = 1037.0
+text = "0:00.000"
+label_settings = SubResource("LabelSettings_mxtnu")
+script = ExtResource("2_6wwcs")
+
+[node name="time" type="Label" parent="."]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 884.0
+offset_right = 537.0
+offset_bottom = 945.0
+text = "0:00.000"
+label_settings = SubResource("LabelSettings_ycw00")
+script = ExtResource("2_4hjkw")
