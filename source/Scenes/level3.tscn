@@ -63,6 +63,9 @@ timeBeforeCanSlideAgain = 0.0
 [node name="AudioStreamPlayer" parent="PlayerCharacter/PlayerCharacterV2" index="0"]
 pitch_scale = 0.71
 
+[node name="hardpain" parent="PlayerCharacter/PlayerCharacterV2/BackPain" index="0"]
+layout_mode = 0
+
 [node name="Map" type="Node3D" parent="."]
 
 [node name="Blocks" type="Node3D" parent="Map"]
@@ -82,17 +85,24 @@ size = Vector3(102.952, 182.609, 4.67632)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -413.857, -59.3989, 61.2033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.169, -59.3989, 61.2033)
 use_collision = true
 collision_mask = 3
-size = Vector3(587.705, 461.227, 158.244)
+size = Vector3(10.3296, 461.227, 158.244)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400.176, -59.3989, 128.033)
+use_collision = true
+collision_mask = 3
+size = Vector3(560.344, 461.227, 24.5854)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -360.966, -63.9131, 257.304)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -360.966, -63.9131, 181.128)
 use_collision = true
 collision_mask = 3
-size = Vector3(678.887, 461.227, 158.244)
+size = Vector3(678.887, 461.227, 5.89202)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="Map/Blocks"]
@@ -103,17 +113,17 @@ size = Vector3(687.25, 6.0606, 197.419)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D18" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -653.882, -18.9599, 82.2266)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -653.882, -18.9599, 146.826)
 use_collision = true
 collision_mask = 3
-size = Vector3(110.506, 372.028, 197.419)
+size = Vector3(110.506, 372.028, 68.2212)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D19" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -613.522, -43.2216, 83.6721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -613.522, -43.2216, 112.513)
 use_collision = true
 collision_mask = 3
-size = Vector3(191.84, 321.161, 197.419)
+size = Vector3(191.84, 321.161, 139.737)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Map/Blocks"]
@@ -128,6 +138,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317.707, -18.6704, 155.169)
 use_collision = true
 collision_mask = 3
 size = Vector3(52.0069, 291.93, 51.8357)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -318.912, -161.234, 155.01)
+use_collision = true
+collision_mask = 3
+size = Vector3(570.019, 5.73746, 51.8357)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]

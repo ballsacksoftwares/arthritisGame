@@ -19,7 +19,7 @@ class_name CameraObject
 
 #fov variables
 @export_group("fov variables")
-var targetFOV : float 
+@export var targetFOV : float 
 var lastFOV : float 
 var addonFOV : float 
 @export var baseFOV : float

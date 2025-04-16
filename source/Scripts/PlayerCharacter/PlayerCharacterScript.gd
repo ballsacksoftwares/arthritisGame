@@ -20,6 +20,8 @@ var currentState
 @export var backPainMultiplier:float = 1
 ## the maximum amount of back pain you can get before you die
 @export var maxBackPain:int = 100
+## the death image that show on the back pain meter easgyfrosgyudfahjklsdfjlhkdsf
+@export var deathimg : Texture2D
 @export_group("musical harmonies")
 @export var music:Resource
 @export_group("move variables")
@@ -136,7 +138,8 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
 @onready var backpainMeter = $BackPain
-var backpain = 0
+## dont edit this variable it is exported so hazards can access it
+@export var backpain = 0
 var dead = false
 var skeleton = preload("res://Scenes/skeleton.tscn")
 
@@ -213,7 +216,12 @@ func _process(delta):
 	if backPainEnabled and backpain >= maxBackPain and not dead:
 		dead = true
 		backpain = maxBackPain
+		grapHookRope.visible = false
 		backpainMeter.value = maxBackPain
+		backpainMeter.texture_under = null
+		backpainMeter.texture_progress = deathimg
+		cameraHolder.dashFOV = 90.0
+		cameraHolder.targetFOV = 90.0
 		var skele = skeleton.instantiate()
 		skele.position = self.position
 		skele.rotation = self.rotation
