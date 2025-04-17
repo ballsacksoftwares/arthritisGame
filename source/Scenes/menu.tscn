@@ -28,13 +28,13 @@ panorama = ExtResource("5_8ph6h")
 [sub_resource type="Sky" id="Sky_iebnq"]
 sky_material = SubResource("PanoramaSkyMaterial_bdr3p")
 
-[sub_resource type="Environment" id="Environment_kmwmt"]
+[sub_resource type="Environment" id="Environment_8ph6h"]
 background_mode = 2
 sky = SubResource("Sky_iebnq")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.111222, 0.0988024, 0.00150054, 1)
+fog_light_color = Color(0.09, 0.09, 0.09, 1)
 fog_light_energy = 3.52
 fog_sky_affect = 0.607
 fog_depth_curve = 3.0
@@ -128,7 +128,7 @@ script = ExtResource("4_g8i7c")
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_kmwmt")
+environment = SubResource("Environment_8ph6h")
 camera_attributes = SubResource("CameraAttributesPractical_2a60c")
 
 [node name="Map" type="Node3D" parent="."]

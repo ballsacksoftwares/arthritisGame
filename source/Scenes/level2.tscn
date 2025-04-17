@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://celm26gbrje74"]
+[gd_scene load_steps=24 format=3 uid="uid://celm26gbrje74"]
 
 [ext_resource type="PackedScene" uid="uid://c75mkg40sta2d" path="res://Scenes/timer.tscn" id="1_lgosu"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_styii"]
 [ext_resource type="AudioStream" uid="uid://qiahkuet16ki" path="res://Scenes/DangerHigh_120_C_Sfx_02.wav" id="2_1k4by"]
 [ext_resource type="Texture2D" uid="uid://0j8jup3boiq3" path="res://Textures/heck.jpg" id="2_vn460"]
 [ext_resource type="Texture2D" uid="uid://uqck4feey5v2" path="res://Textures/Brick/Brick_10-128x128.png" id="3_onqnr"]
+[ext_resource type="PackedScene" uid="uid://txdlosn7knxw" path="res://Scenes/hazardblock.tscn" id="3_r8hce"]
 [ext_resource type="PackedScene" uid="uid://bwesx33qa0fi0" path="res://Scenes/hospital.glb" id="4_dlanv"]
 [ext_resource type="Texture2D" uid="uid://bm0bsbo6neu0w" path="res://Textures/building/Facade002_4K-JPG_Color.jpg" id="5_r8hce"]
 [ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/WinPad.gd" id="5_vn2uo"]
@@ -26,7 +27,7 @@ sky = SubResource("Sky_mu7lp")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.211673, 0.00983895, 0, 1)
+fog_light_color = Color(0.05, 0.00476666, 0.004, 1)
 fog_light_energy = 3.52
 fog_sky_affect = 0.607
 fog_depth_curve = 3.0
@@ -41,13 +42,12 @@ metallic = 1.0
 metallic_texture = ExtResource("7_yj6rp")
 roughness_texture = ExtResource("9_5flq6")
 emission_enabled = true
-emission_energy_multiplier = 2.26
+emission_energy_multiplier = 0.24
 emission_texture = ExtResource("6_ca0bt")
 normal_enabled = true
 normal_texture = ExtResource("8_orbd0")
 uv1_scale = Vector3(0.02, 0.02, 0.02)
 uv1_triplanar = true
-uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
 albedo_texture = ExtResource("3_onqnr")
@@ -62,7 +62,7 @@ metallic = 1.0
 metallic_texture = ExtResource("7_yj6rp")
 roughness_texture = ExtResource("9_5flq6")
 emission_enabled = true
-emission_energy_multiplier = 2.26
+emission_energy_multiplier = 0.24
 emission_texture = ExtResource("6_ca0bt")
 normal_enabled = true
 normal_texture = ExtResource("8_orbd0")
@@ -91,6 +91,11 @@ z_index = 1555
 environment = SubResource("Environment_5qi50")
 camera_attributes = SubResource("CameraAttributesPractical_2a60c")
 
+[node name="hazard" parent="Environment/WorldEnvironment" instance=ExtResource("3_r8hce")]
+transform = Transform3D(5924.85, 0, 0, 0, 59.388, 0, 0, 0, 5366.94, -42.7576, -113.143, -23.5561)
+layers = 0
+instakill = true
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
@@ -104,6 +109,10 @@ timeBeforeCanSlideAgain = 0.0
 
 [node name="AudioStreamPlayer" parent="PlayerCharacter/PlayerCharacterV2" index="0"]
 volume_db = -15.063
+
+[node name="hardpain" parent="PlayerCharacter/PlayerCharacterV2/BackPain" index="0"]
+offset_left = 0.0
+offset_right = 2346.0
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -215,11 +224,11 @@ size = Vector3(33.7456, 400.759, 33.6248)
 material = ExtResource("11_051s1")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.466, -34.7679, 41.9654)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.466, 25.9876, 41.9654)
 use_collision = true
 collision_layer = 4097
 collision_mask = 3
-size = Vector3(33.067, 173.264, 7.64468)
+size = Vector3(33.067, 51.7531, 7.64468)
 material = SubResource("StandardMaterial3D_ue4po")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
@@ -293,9 +302,9 @@ size = Vector3(95.6308, 1.71985, 100.451)
 material = ExtResource("11_051s1")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-1.11551e-07, 0, 1.11552, 0, 0.497079, 0, -2.55199, 0, -4.87609e-08, -43.8303, 2.52555, 0.915491)
-text = "oh yeah you're trespassing on the city
-rooftops btw"
+transform = Transform3D(-1.11551e-07, 0, 1.11552, 0, 4.19996, 0, -2.55199, 0, -4.87609e-08, -123.254, 2.52555, 26.3216)
+text = "by the way you're trespassing on the city rooftops
+and the city doesnt really like that"
 
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(-0.217628, 0, 1.11145, 0, 9.46468, 0, -2.5427, 0, -0.095129, -50.0327, 2.98919, 10.2453)

@@ -64,7 +64,8 @@ timeBeforeCanSlideAgain = 0.0
 pitch_scale = 0.71
 
 [node name="hardpain" parent="PlayerCharacter/PlayerCharacterV2/BackPain" index="0"]
-layout_mode = 0
+offset_left = 0.0
+offset_right = 2346.0
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -85,10 +86,26 @@ size = Vector3(102.952, 182.609, 4.67632)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.169, -59.3989, 61.2033)
+transform = Transform3D(0.427567, 0, 0, 0, 1, 0, 0, 0, 1, -151.986, -125.612, 61.2033)
 use_collision = true
 collision_mask = 3
-size = Vector3(10.3296, 461.227, 158.244)
+collision_priority = 0.1
+size = Vector3(168.405, 328.801, 158.244)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.427567, 0, 0, 0, 1, 0, 0, 0, 1, -120.502, 49.2534, 17.5103)
+collision_mask = 3
+collision_priority = 0.1
+size = Vector3(21.1357, 21.9188, 70.858)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.427567, 0, 0, 0, 1, 0, 0, 0, 1, -120.502, 49.2534, 96.4935)
+use_collision = true
+collision_mask = 3
+collision_priority = 0.1
+size = Vector3(21.1357, 21.9188, 87.6809)
 material = SubResource("StandardMaterial3D_st80m")
 
 [node name="CSGBox3D20" type="CSGBox3D" parent="Map/Blocks"]
@@ -221,6 +238,11 @@ material = SubResource("StandardMaterial3D_st80m")
 transform = Transform3D(-3.86638, 0, 0.728144, 0, 3.33878, 0, -4.10736, 0, -0.685425, -48.6288, 2.61414, 12.7357)
 text = "scale the hosiptial       
 and cure your back [p;ain"
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(-3.86638, 0, 0.728144, 0, 4.6615, 0, -4.10736, 0, -0.685425, -166.074, 41.5237, 22.9172)
+text = "\"that's gonna go on your
+hospital bill\" - gameboy"
 
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(-15.5184, 0, -0.556643, 0, 14.1213, 0, -16.4856, 0, 0.523986, -558.173, 120.926, 169.635)

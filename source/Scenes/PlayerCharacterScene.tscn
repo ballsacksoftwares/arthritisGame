@@ -185,7 +185,6 @@ maxSlopeAngle = 10.0
 wallJumpVelocity = 3.0
 dashTime = 0.3
 nbDashAllowed = 3
-timeBeforeCanDashAgain = 0.5
 timeBefReloadDash = 0.6
 grapHookMaxDist = 800.0
 grapHookSpeed = 100.0
@@ -322,6 +321,7 @@ tint_progress = Color(1, 0.109804, 0.188235, 1)
 script = ExtResource("6_ntc8i")
 
 [node name="hardpain" type="TextureProgressBar" parent="BackPain"]
+layout_mode = 0
 offset_left = 4.46
 offset_right = 2350.46
 offset_bottom = 6136.0

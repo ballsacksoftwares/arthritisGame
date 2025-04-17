@@ -96,8 +96,8 @@ var canWallRun : bool
 var dashTimeRef : float
 @export var nbDashAllowed : int
 var nbDashAllowedRef : int
-@export var timeBeforeCanDashAgain : float = 0.2
-var timeBeforeCanDashAgainRef : float = 0.2
+@export var timeBeforeCanDashAgain : float = .5
+var timeBeforeCanDashAgainRef : float = .5
 @export var timeBefReloadDash : float
 var timeBefReloadDashRef : float
 var velocityPreDash : Vector3 
@@ -255,6 +255,9 @@ func inputManagement(delta):
 	
 	#delta = 1/60
 	
+	if is_on_floor():
+		timeBeforeCanDashAgain = 0
+	
 	if canInput:
 		match currentState:
 			states.IDLE:
@@ -270,7 +273,6 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.WALK:
-				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run"):
 					runStateChanges()
 				
@@ -288,7 +290,6 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.RUN:
-				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run"):
 					walkStateChanges()
 				
@@ -306,7 +307,6 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.CROUCH: 
-				timeBeforeCanDashAgain = 0
 				if Input.is_action_just_pressed("run") and !ceilingCheck.is_colliding():
 					walkStateChanges()
 				
@@ -314,7 +314,6 @@ func inputManagement(delta):
 					walkStateChanges()
 					
 			states.SLIDE:
-				timeBeforeCanDashAgain = 0
 				if floorCheck.is_colliding():
 					giveBackPain(Vector2(velocity.x,velocity.z).length()/2,delta)
 				
@@ -776,7 +775,8 @@ func dashStateChanges():
 		dashTime = dashTimeRef
 		velocityPreDash = velocity #save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 		
-		giveBackPain(15,1)
+		if not is_on_floor():
+			giveBackPain(15,1)
 		
 		if mesh.scale.y != 1.0:
 			mesh.scale.y = 1.0
