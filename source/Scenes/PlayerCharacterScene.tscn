@@ -156,6 +156,7 @@ shader_parameter/animation_speed = 20.0
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00558686, 0, -0.00668335)
 collision_layer = 2
+floor_block_on_wall = false
 platform_floor_layers = 4294901761
 script = ExtResource("1_5dbx1")
 deathimg = ExtResource("2_62ccf")
@@ -188,11 +189,12 @@ nbDashAllowed = 3
 timeBefReloadDash = 0.6
 grapHookMaxDist = 800.0
 grapHookSpeed = 100.0
-grapHookAccel = 6.0
+grapHookAccel = 7.0
 distToStopGrappleOnFloor = 10.0
 distToStopGrappleIAir = 5.0
 timeBeforeCanGrappleAgain = 0.5
 grappleLaunchJumpVelocity = 8.0
+downDirJump = true
 onFloorKnockbackDivider = 3.5
 wallGravityMultiplier = 0.7
 

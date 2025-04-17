@@ -4,11 +4,16 @@ var timer: float = 0.0  # In seconds
 var running: bool = true
 
 func _ready():
+	if not global_time.running:
+		global_time.timer = 0.0
+		global_time.running = true
+
 	if str(get_tree().current_scene.name) == "level1":
 		global_time.timer = 0.0
+		global_time.running = true
 
 func _process(delta: float) -> void:
-	if running:
+	if global_time.running:
 		# Increment the timer
 		timer += delta
 		# Format the time and display it

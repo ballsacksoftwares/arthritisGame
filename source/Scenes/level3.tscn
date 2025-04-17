@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clulwyx4nxpva"]
+[gd_scene load_steps=16 format=3 uid="uid://clulwyx4nxpva"]
 
 [ext_resource type="PackedScene" uid="uid://c75mkg40sta2d" path="res://Scenes/timer.tscn" id="1_mrxql"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_qrg6c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bgyqgmr6ixwub" path="res://Textures/Tile/Tile_16-128x128.png" id="3_jaajx"]
 [ext_resource type="ArrayMesh" uid="uid://b00vl1nmggcku" path="res://Scenes/HospitalBed.obj" id="6_mrxql"]
 [ext_resource type="Script" uid="uid://e7vp2bncvglo" path="res://Scripts/Others/WinPad.gd" id="6_vn7r1"]
+[ext_resource type="Script" uid="uid://cox6r2ei14ge0" path="res://Scenes/endtime.gd" id="7_qrg6c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -41,6 +42,8 @@ emission_energy_multiplier = 2.8
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_didp7"]
 height = 0.15
 radius = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0bmtn"]
 
 [node name="TemplateMap" type="Node3D"]
 
@@ -271,6 +274,19 @@ shape = SubResource("CylinderShape3D_didp7")
 transform = Transform3D(0.0884355, 0, 0, 0, 0.0777294, 0, 0, 0, 0.0327006, -571.2, 118.507, 165.645)
 mesh = ExtResource("6_mrxql")
 
+[node name="endtime" type="CSGBox3D" parent="."]
+transform = Transform3D(71.7346, 0, 0, 0, 1.12873, 0, 0, 0, 50.7713, -575.3, 117.859, 158.664)
+layers = 0
+script = ExtResource("7_qrg6c")
+
+[node name="Area3D" type="Area3D" parent="endtime"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="endtime/Area3D"]
+shape = SubResource("BoxShape3D_0bmtn")
+
 [connection signal="area_entered" from="Jumppad4/Area3D" to="Jumppad4" method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="endtime/Area3D" to="endtime" method="_on_area_3d_area_entered"]
 
 [editable path="PlayerCharacter/PlayerCharacterV2"]
