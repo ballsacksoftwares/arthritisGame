@@ -28,28 +28,28 @@ var currentState
 var moveSpeed : float
 var desiredMoveSpeed : float 
 @export var desiredMoveSpeedCurve : Curve
-@export var maxSpeed : float 
-@export var walkSpeed : float
-@export var runSpeed : float
-@export var crouchSpeed : float
+@export var maxSpeed : float = 99999
+@export var walkSpeed : float = 25
+@export var runSpeed : float = 25
+@export var crouchSpeed : float = 7
 var slideSpeed : float
-@export var slideSpeedAddon : float 
-@export var dashSpeed : float 
+@export var slideSpeedAddon : float = 8 
+@export var dashSpeed : float  = 130
 var moveAcceleration : float
-@export var walkAcceleration : float
-@export var runAcceleration : float 
-@export var crouchAcceleration : float 
+@export var walkAcceleration : float = 10
+@export var runAcceleration : float = 10
+@export var crouchAcceleration : float  = 6
 var moveDecceleration : float
-@export var walkDecceleration : float
-@export var runDecceleration : float 
-@export var crouchDecceleration : float 
+@export var walkDecceleration : float = 10
+@export var runDecceleration : float = 10
+@export var crouchDecceleration : float = 6
 @export var inAirMoveSpeedCurve : Curve
 
 #movement variables
 @export_group("movement variables")
 var inputDirection : Vector2 
 var moveDirection : Vector3 
-@export var hitGroundCooldown : float #amount of time the character keep his accumulated speed before losing it (while being on ground)
+@export var hitGroundCooldown : float = .2 #amount of time the character keep his accumulated speed before losing it (while being on ground)
 var hitGroundCooldownRef : float 
 var lastFramePosition : Vector3 
 var floorAngle #angle of the floor the character is on 
@@ -61,16 +61,16 @@ var lastFallDamageTaken = Time.get_unix_time_from_system()
 
 #jump variables
 @export_group("jump variables")
-@export var jumpHeight : float
-@export var jumpTimeToPeak : float
-@export var jumpTimeToFall : float
+@export var jumpHeight : float = 4
+@export var jumpTimeToPeak : float = .4
+@export var jumpTimeToFall : float = .35
 @onready var jumpVelocity : float = (2.0 * jumpHeight) / jumpTimeToPeak
-@export var jumpCooldown : float
+@export var jumpCooldown : float = .25
 var jumpCooldownRef : float 
 @export var nbJumpsInAirAllowed : int 
 var nbJumpsInAirAllowedRef : int 
 var canCoyoteJump : bool = true
-@export var coyoteJumpCooldown : float
+@export var coyoteJumpCooldown : float = .3
 var coyoteJumpCooldownRef : float
 var coyoteJumpOn : bool = false
 var jumpBuffOn : bool = false
@@ -190,6 +190,33 @@ func _ready():
 	#set the mesh scale of the character
 	mesh.scale = Vector3(1.0, 1.0, 1.0)
 	
+	#do movementset crap
+	var movementSet = global_vals.movementset
+	if movementSet != 0:
+		backPainEnabled = movementSet != 4
+		maxBackPain = global_vals.movementMaxBackPains[movementSet]
+		
+		if movementSet == 1:
+			jumpTimeToPeak = .5
+			jumpTimeToFall = .4
+		
+		if movementSet == 2:
+			jumpTimeToPeak = .2
+			jumpTimeToFall = .2
+		
+		jumpGravity = (-2.0 * jumpHeight) / (jumpTimeToPeak * jumpTimeToPeak)
+		fallGravity = (-2.0 * jumpHeight) / (jumpTimeToFall * jumpTimeToFall)
+		
+		if movementSet == 5:
+			walkSpeed = 0
+			runSpeed = 0
+			moveSpeed = 0
+			walkAcceleration = 0
+			runAcceleration = 0
+			crouchSpeed = 0
+			crouchAcceleration = 0
+			jumpHeight = 0
+	
 	#initalize back pain thingys
 	if !backPainEnabled:
 		backpainMeter.visible = false
@@ -200,6 +227,12 @@ func _process(delta):
 	#the behaviours that is preferable to check every "visual" frame
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
+	
+	if global_vals.movementset == 5:
+		inputDirection = Vector2.ZERO
+		moveDirection = Vector3.ZERO
+		desiredMoveSpeed = 0
+		moveSpeed = 0 
 					
 	if !pauseMenu.pauseMenuEnabled:
 		if dead:
@@ -307,6 +340,8 @@ func inputManagement(delta):
 					grappleStateChanges()
 					
 			states.CROUCH: 
+				if global_vals.movementset == 5: currentState = states.IDLE
+				
 				if Input.is_action_just_pressed("run") and !ceilingCheck.is_colliding():
 					walkStateChanges()
 				
@@ -316,6 +351,9 @@ func inputManagement(delta):
 			states.SLIDE:
 				if floorCheck.is_colliding():
 					giveBackPain(Vector2(velocity.x,velocity.z).length()/2,delta)
+					
+				if Input.is_action_just_pressed("dash"):
+					dashStateChanges()
 				
 				if Input.is_action_just_pressed("run"):
 					slideStateChanges()
@@ -327,6 +365,8 @@ func inputManagement(delta):
 				
 				if Input.is_action_just_pressed("crouch | slide"):
 					slideStateChanges()
+				if Input.is_action_just_pressed("grappleHook"):
+					grappleStateChanges()
 					
 			states.JUMP:
 				if Input.is_action_just_pressed("crouch | slide"):
@@ -352,6 +392,8 @@ func inputManagement(delta):
 					
 				if Input.is_action_just_pressed("grappleHook"):
 					grappleStateChanges()
+				if Input.is_action_just_pressed("crouch | slide"):
+					slideStateChanges()
 					
 			states.ONWALL:
 				if Input.is_action_just_pressed("jump"):
@@ -368,6 +410,8 @@ func inputManagement(delta):
 					
 				if Input.is_action_just_pressed("grappleHook"):
 					grappleStateChanges()
+				if Input.is_action_just_pressed("crouch | slide"):
+					slideStateChanges()
 					
 func displayStats():
 	#call the functions in charge of displaying the controller properties
@@ -397,9 +441,9 @@ func applies(delta):
 			if currentState != states.GRAPPLE: velocity.y += fallGravity * delta
 			if currentState != states.SLIDE and currentState != states.DASH and currentState != states.GRAPPLE: currentState = states.INAIR 
 			
-		if currentState == states.SLIDE:
-			if !startSlideInAir: 
-				slideTime = -1 #if the character start slide on the grund, and the jump, the slide is canceled
+		#if currentState == states.SLIDE:
+			#if !startSlideInAir: 
+				#slideTime = -1 #if the character start slide on the grund, and the jump, the slide is canceled
 				
 		if currentState == states.DASH: velocity.y = 0.0 #set the y axis velocity to 0, to allow the character to not be affected by gravity while dashing
 		
@@ -451,8 +495,8 @@ func applies(delta):
 			#(simply said, i have to adjust manually the lastFramePosition value in order to make the character slide indefinitely downhill bot not uphill)
 			#if you know how to resolve that issue, don't hesitate to make a post about it on the discussions tab of the project's Github repository
 			
-			if !startSlideInAir and lastFramePosition.y+0.1 < position.y: #don't know why i need to add a +0.1 to lastFramePosition.y, otherwise it breaks the mechanic some times
-				slideTime = -1 
+			#if !startSlideInAir and lastFramePosition.y+0.1 < position.y: #don't know why i need to add a +0.1 to lastFramePosition.y, otherwise it breaks the mechanic some times
+				#slideTime = -1 
 				
 			if !startSlideInAir and slopeAngle < maxSlopeAngle:
 				if slideTime > 0: 
@@ -503,8 +547,7 @@ func applies(delta):
 		
 func move(delta):
 	#direction input
-	inputDirection = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBackward")
-	
+	inputDirection = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBackward")	
 	#get direction input when sliding
 	if currentState == states.SLIDE:
 		if moveDirection == Vector3.ZERO: #if the character is moving
@@ -645,9 +688,12 @@ func jump(jumpBoostValue : float, isJumpBoost : bool, superjump=null):
 		else:
 			jumpCooldown = jumpCooldownRef
 			canJump = true 
+			if global_vals.movementset == 5: 
+				canJump = false
 			
 	#apply jump
 	if canJump:
+		if currentState == states.SLIDE: slideTime = -1
 		if isJumpBoost: nbJumpsInAirAllowed = nbJumpsInAirAllowedRef
 		currentState = states.JUMP
 		velocity.y = jumpVelocity + jumpBoostValue #apply directly jump velocity to y axis velocity, to give the character instant vertical forcez

@@ -1,12 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://c75mkg40sta2d"]
+[gd_scene load_steps=8 format=3 uid="uid://c75mkg40sta2d"]
 
 [ext_resource type="FontFile" uid="uid://8fws2xig8hap" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="1_ycw00"]
 [ext_resource type="Script" uid="uid://bhaflqesbvjt5" path="res://Scenes/timer.gd" id="2_4hjkw"]
 [ext_resource type="Script" uid="uid://cciobgnasta07" path="res://Scenes/globaltimedisplay.gd" id="2_6wwcs"]
+[ext_resource type="Script" uid="uid://c4m4lo0q7fa11" path="res://Scenes/showmovement.gd" id="3_6wwcs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxtnu"]
 font = ExtResource("1_ycw00")
 font_size = 90
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wwcs"]
+font = ExtResource("1_ycw00")
+font_size = 25
+font_color = Color(0.638661, 0.638661, 0.638661, 1)
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
@@ -37,6 +45,15 @@ theme_override_font_sizes/font_size = 0
 text = "0:00.000"
 label_settings = SubResource("LabelSettings_mxtnu")
 script = ExtResource("2_6wwcs")
+
+[node name="time2" type="Label" parent="."]
+offset_left = -951.0
+offset_top = 1037.0
+offset_right = -306.0
+offset_bottom = 1073.0
+text = "movement mode: WHAY LAND!"
+label_settings = SubResource("LabelSettings_6wwcs")
+script = ExtResource("3_6wwcs")
 
 [node name="time" type="Label" parent="."]
 layout_mode = 0

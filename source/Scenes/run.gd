@@ -6,7 +6,8 @@ func _input(event):
 		mousedir = event.relative
 
 func _on_mouse_entered() -> void:
-	self.position += (mousedir * 10)
+	print("nah bro you chill")
+	#self.position += (mousedir * 10)
 	
 func _on_pressed() -> void:
 	get_tree().quit()

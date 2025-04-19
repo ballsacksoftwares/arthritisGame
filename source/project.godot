@@ -20,6 +20,7 @@ config/icon="uid://s0o7aupncy18"
 [autoload]
 
 global_time="*res://Scripts/globaltime.gd"
+global_vals="*res://global_vals.gd"
 
 [display]
 

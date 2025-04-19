@@ -306,6 +306,10 @@ transform = Transform3D(-1.11551e-07, 0, 1.11552, 0, 4.19996, 0, -2.55199, 0, -4
 text = "by the way you're trespassing on the city rooftops
 and the city doesnt really like that"
 
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(-1.11551e-07, 0, 1.11552, 0, 4.19996, 0, -2.55199, 0, -4.87609e-08, -269.163, 21.5186, 2.62842)
+text = "by the way you can press r to instantly restart the level"
+
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(-0.217628, 0, 1.11145, 0, 9.46468, 0, -2.5427, 0, -0.095129, -50.0327, 2.98919, 10.2453)
 text = "press left shift to DASH!?!?!?!?!??!?!?!!??!?!?!?!?!

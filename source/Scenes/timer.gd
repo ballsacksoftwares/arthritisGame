@@ -5,7 +5,6 @@ var running: bool = true
 
 func _ready():
 	if not global_time.running:
-		global_time.timer = 0.0
 		global_time.running = true
 
 	if str(get_tree().current_scene.name) == "level1":
